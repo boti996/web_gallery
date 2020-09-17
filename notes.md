@@ -127,3 +127,10 @@ docker system prune [-a]
 lásd:
 https://github.com/MicrosoftDocs/live-share/issues/224
 
+## Continuous Integration
+
+Github Actions CI workflow template script hozzáadása a projekthez:
+https://docs.github.com/en/actions/guides/setting-up-continuous-integration-using-workflow-templates
+
+Github Actions script készítése repositoryhoz:
+https://docs.github.com/en/actions/quickstart
