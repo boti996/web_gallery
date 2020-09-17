@@ -121,3 +121,9 @@ docker rmi <image>
 # purge stuff
 docker system prune [-a]
 ```
+
+## Github remote szerver elérése VSCode-ban
+
+lásd:
+https://github.com/MicrosoftDocs/live-share/issues/224
+
