@@ -134,3 +134,7 @@ https://docs.github.com/en/actions/guides/setting-up-continuous-integration-usin
 
 Github Actions script készítése repositoryhoz:
 https://docs.github.com/en/actions/quickstart
+
+## Dockeren futó webszerver elérése HTTPS-en keresztül
+
+https://devblogs.microsoft.com/aspnet/configuring-https-in-asp-net-core-across-different-platforms/
