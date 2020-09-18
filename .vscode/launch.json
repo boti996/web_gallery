@@ -15,7 +15,7 @@
             "console": "internalConsole",
             "stopAtEntry": false,
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_ENVIRONMENT": "HttpsDevelopment",
                 "DOCKER_HOST": "unix:///run/user/1000/docker.sock"
             },
             "sourceFileMap": {
