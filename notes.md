@@ -138,3 +138,65 @@ https://docs.github.com/en/actions/quickstart
 ## Dockeren futó webszerver elérése HTTPS-en keresztül
 
 https://devblogs.microsoft.com/aspnet/configuring-https-in-asp-net-core-across-different-platforms/
+
+## MongoDB adatbázos használata
+
+* VSCode-hoz elérhető MongoDB extension a könnyebb kezelhetőség érdekében.
+* Alternatíva lehet a shell felület vagy a Robo 3T felület használata.
+
+https://code.visualstudio.com/docs/azure/mongodb
+
+Docker image dokumentáció:
+https://hub.docker.com/_/mongo
+
+mongo shell parancsok:
+https://www.tutorialspoint.com/mongodb/index.htm
+
+mongo config paraméterek:
+https://docs.mongodb.com/manual/reference/configuration-options/
+https://docs.mongodb.com/manual/reference/program/mongod/#bin.mongod
+
+### X.509 certificate authentikáció
+* Azonos CA-val aláírt kliens- és szerveroldali certificate
+* Kliens oldali certificate tartalmazza a következő mezőket:
+    >keyUsage = digitalSignature
+    extendedKeyUsage = clientAuth
+* Egyedi kliens-certek
+* Kliens oldali cert CN-je vagy az egyik SAN-ja  
+---TODO---
+
+### Mirror/failover szerver eállítása
+
+https://docs.mongodb.com/manual/replication/
+
+https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/
+
+https://docs.mongodb.com/manual/tutorial/expand-replica-set/
+
+https://docs.mongodb.com/manual/tutorial/deploy-replica-set/
+
+---TODO---
+
+### Konfiguráció
+
+```yaml
+# wiredTigerCacheSizeGB
+storage:
+   wiredTiger:
+      engineConfig:
+         cacheSizeGB: 1.5
+```
+
+```shell
+$ # create mongodb server
+$ docker pull mongo
+$ docker rm mongo_onlab; docker run --name mongo_onlab -v /home/testuser/project/db/:/data/db -v /home//testuser/project/mongo:/etc/mongo -it -p -v  27017:27017 mongo --config /etc/mongo/mongod.conf
+
+```
+
+# TODO:
+## MongoDB
+* Client X.509 auth
+* Replica
+* Replica X.509 member auth
+* GridFS
