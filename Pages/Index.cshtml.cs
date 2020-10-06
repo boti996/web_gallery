@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace web_gallery.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : Models.BasePageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
@@ -21,5 +21,6 @@ namespace web_gallery.Pages
         {
 
         }
+        public bool isLoggedIn() { return true; }
     }
 }
