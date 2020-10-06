@@ -200,3 +200,27 @@ $ docker rm mongo_onlab; docker run --name mongo_onlab -v /home/testuser/project
 * Replica
 * Replica X.509 member auth
 * GridFS
+
+## Razor Pages
+
+https://docs.microsoft.com/en-us/aspnet/core/razor-pages
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start
+https://www.learnrazorpages.com/razor-pages/tutorial/bakery
+https://www.learnrazorpages.com/razor-pages/model-binding
+https://weblog.west-wind.com/posts/2019/May/18/Live-Reloading-Server-Side-ASPNET-Core-Apps
+https://www.learnrazorpages.com/razor-pages/files/layout
+https://docs.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/3-creating-a-consistent-look
+https://www.learnrazorpages.com/razor-pages/files/layout
+
+A Razor Pages egy keretrendszer és egy tervezési modell, amely webes felületek egyszerű készítését teszi lehetővé.
+Alapértelmezetten a Pages könyvtárban találhatóak a HTML template-ek (.cshtml kiterjesztéssel), illetve a hozzájuk tartozó modellek (.cs kiterjesztéssel). A HTML template-ek HTML kódot, a modell elemeinek bindolását, illetve programozott logikát tartalmazhat.
+Az oldalak a @page direktívával kezdődnek.
+Ismerniük kell az oldalaknak a hozzájuk tartozó PageModell megvalósítást, illetve bindolni kell  a modellt a @model direktívával.
+A programozott részek, paraméterek {} blokkokba kerülnek.
+A modell elemeit a @Model elemen keresztül érhetjük el.
+Alapértelmezetten / és /index a nyitóoldalunkra, az Index-re irányít át.
+A routing névegyezés alapján történik. Lehetőségünk van többszintű routingra is. Ehhez csak annyit kell tennünk, hogy új könyvtárat hozunk létre, majd abban helyezzük el a kívánt oldal fájljait.
+Definiálhatunk úgynevezett layoutokat is, amelyek önmagukban nem generálható oldalaknak felelnek meg. Ezek a content page-eket kiegészítő, újrahasznosítható elemek, mint például egy HTML váz, header, footer, scriptek stb. Magasfokú rugalmasságot tesz lehetővé, mivel a content page-eknél válogathatunk ezek közül, igény esetén akár felül is írhatjuk a layoutok bizonyos részeit (pl. section) 1-1 content page esetén.
+A section szolgálja a layoutok testreszabhatóságát content page oldalról.
+Tehát nem csak a content page tud különböző layoutokat használni, hanem maguk a layoutok is testreszabatóak, specializálhatóak a content page-ekben definiált section blokkok segítségével.
+A projektben speciális fájlok a _Layout.cshtml (az oldalak alapvető HTML váza), a _ViewStart.cshtml (az adott könyvtárban vagy a gyermekeiben definiált content page-ek lehívásakor hajtódik végre a fájl tartalma), illetve a _ViewImports.cshtl (ez tartalmazza a page-ek által közösen elérhető névtereket, segédkönyvtárakat).
