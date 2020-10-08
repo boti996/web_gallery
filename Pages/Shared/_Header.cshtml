@@ -18,11 +18,11 @@
             </ul>
             <!-- Right-aligned -->
             <ul class="navbar-nav flex-grow-1">
-                @if (Model.SessionManagement.isLoggedIn())
+                @if (true)
                 {
                     @* Show profile name with a link to profile edit page *@
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">@Model.SessionManagement.UserId</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">UserId</a>
                     </li>
                     @* Logout *@
                     <li class="nav-item">
@@ -32,9 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Media/Upload">Upload</a>
                     </li>
-                    @if (Model.UserManagement.UserType == Models.UserTypes.Admin) {
+                    @if (true) {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Invite">Upload</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Invite">Invite</a>
                         </li>
                     }
                 }
@@ -43,7 +43,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
                     </li>
-                }
+                } 
             </ul>
 
         </div>

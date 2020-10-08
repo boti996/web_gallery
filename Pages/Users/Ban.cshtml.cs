@@ -8,16 +8,21 @@ using Microsoft.Extensions.Logging;
 
 namespace web_gallery.Pages
 {
-    public class UserLogoutModel : PageModel
+    public class UserBanModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public UserLogoutModel(ILogger<IndexModel> logger)
+        public UserBanModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
         public void OnGet()
+        {
+
+        }
+
+        public void OnPost()
         {
 
         }
