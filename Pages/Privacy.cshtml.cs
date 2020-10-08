@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace web_gallery.Pages
 {
-    public class PrivacyModel : PageModel
+    public class PrivacyModel : Models.BasePageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
 

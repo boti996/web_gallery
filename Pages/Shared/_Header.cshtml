@@ -7,6 +7,7 @@
         </button>
         <!-- Menu elements -->
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <!-- Left-aligned -->
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
@@ -14,12 +15,37 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                 </li>
-                @if (Model.isLoggedIn()) {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/MainPage">Main Page</a>
-                </li>
+            </ul>
+            <!-- Right-aligned -->
+            <ul class="navbar-nav flex-grow-1">
+                @if (Model.SessionManagement.isLoggedIn())
+                {
+                    @* Show profile name with a link to profile edit page *@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">@Model.SessionManagement.UserId</a>
+                    </li>
+                    @* Logout *@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Logout">Logout</a>
+                    </li>
+                    @* Upload *@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Media/Upload">Upload</a>
+                    </li>
+                    @if (Model.UserManagement.UserType == Models.UserTypes.Admin) {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Invite">Upload</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                    </li>
                 }
             </ul>
+
         </div>
     </div>
 </nav>

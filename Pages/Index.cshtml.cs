@@ -21,6 +21,5 @@ namespace web_gallery.Pages
         {
 
         }
-        public bool isLoggedIn() { return true; }
     }
 }

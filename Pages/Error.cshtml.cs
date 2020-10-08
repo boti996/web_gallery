@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace web_gallery.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class ErrorModel : PageModel
+    public class ErrorModel : Models.BasePageModel
     {
         public string RequestId { get; set; } = "";
 
