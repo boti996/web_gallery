@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace web_gallery.Pages
 {
-    public class IndexModel : Models.BasePageModel
+    public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
