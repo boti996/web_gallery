@@ -224,3 +224,115 @@ Definiálhatunk úgynevezett layoutokat is, amelyek önmagukban nem generálhat�
 A section szolgálja a layoutok testreszabhatóságát content page oldalról.
 Tehát nem csak a content page tud különböző layoutokat használni, hanem maguk a layoutok is testreszabatóak, specializálhatóak a content page-ekben definiált section blokkok segítségével.
 A projektben speciális fájlok a _Layout.cshtml (az oldalak alapvető HTML váza), a _ViewStart.cshtml (az adott könyvtárban vagy a gyermekeiben definiált content page-ek lehívásakor hajtódik végre a fájl tartalma), illetve a _ViewImports.cshtl (ez tartalmazza a page-ek által közösen elérhető névtereket, segédkönyvtárakat).
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authorization/secure-data?view=aspnetcore-3.1
+https://docs.microsoft.com/en-us/visualstudio/modeling/structure-your-modeling-solution?view=vs-2019
+
+Middleware
+
+Routing policy-k
+
+MVVM:
+* Model: Ez reprezentálja a dinamikusan betötött adatot, az adatmodellt kapcsoljuk hozzá egy forráshoz (pl. mongodb), és csatornázzuk be a HTML kódgenerálásba
+* View: .cshtml fájl: megjelenítés, HTML template, data binding a viewmodellen keresztül
+* ViewModel: controller + 
+
+https://stackify.com/asp-net-razor-pages-vs-mvc/
+
+https://www.mikesdotnetting.com/article/324/areas-in-razor-pages
+
+https://www.learnrazorpages.com/razor-pages/routing
+
+Routingom:
+GET         Anyone         /, /Index
+GET, POST   Login          /Users/Profile/Edit
+GET         Anyone         /Users/Profile?userid=<user_id>
+GET, POST   Anyone         /Users/Login
+GET         Login          /Users/Logout
+GET, POST   Login, Admin   /Users/Invite
+GET, POST   Login, Admin   /Users/Ban
+GET, POST   Anyone         /Users/Register?token=<register_token>
+GET         Anyone         /About
+--/Error
+GET, POST   Login          /Media/Upload
+GET         Anyone         /Media/Albums
+GET         Anyone         /Media/Albums/View?albumid=<album_id>
+GET         Anyone         /Media/Videos
+GET, POST   Login, Admin   /Media/Moderate
+
+Hookok:
+Admin policy:
+   adminPrivilegeRequired() ->
+      redirect to /Index
+
+Login policy:
+   loginRequired(timeout=60, navigate_back_url=origin) -> 
+      login check
+      redirect to /Users/Login
+      Error message kitöltése az oldalon sárgával
+      tryLogin(navigate_to_url=origin)
+      timeout -> nem vár tovább, nem irányít vissza
+
+/Users/Login POST:
+   tryLogin(navigate_to_url=/Index) ->
+      authentikáció  ->
+         wait 5 sec
+         siker: átirányít navigate_to_url-re
+         különben: Error message kitöltése az oldalon pirossal
+
+/Users/Invite POST:
+   trySendInvite(retry=2) ->
+      generate token
+      send email ->
+         siker: Error message kitöltése az oldalon zölddel
+               DB-be lementeni a tokent + lejárat
+         különben: Error message kitöltése az oldalon pirossal
+
+/Users/Profile/Edit POST:
+   editProfile() ->
+      validation ->
+         siker: redirect to /Users/Profile?userid=<id>
+         különben: Error message kitöltése az oldalon pirossal
+
+
+/Users/Ban POST:
+   banEditor() ->
+      get from DB ->
+         delete from DB ->
+            siker: Error message az oldalon zölddel
+            különben: Error piros, exception, alert rendszergazda
+         különben: Error piros
+
+
+/Users/Register POST:
+   register() ->
+      token check ->
+         validáció ->
+            DB-be írás ->
+               redirect to /Users/Login
+      különben: Error message piros
+
+/Media/Upload POST:
+   upload(videoOrPhotos, fájlok, késleltetett) ->
+      form validation
+      datatype validation
+      db feltöltés
+      logolás
+      késleltetett -> 
+         Error message sárgán
+         task elindítása: resource-hoz x időn keresztül más nem fér hozzá, moderate oldalhoz hozzáfér
+      különben: redirect /Media/Albums/View?albumid=<album_id> vagy /Media/Videos
+
+/Media/Moderate POST:
+   moderate() ->
+      db törlések ha van
+      Error message zöld féjlok listájával
+      logolás
+
+/Media/Albums/View?albumid=<album_id> GET:
+   checkAlbumId ->
+      rossz: redirect to /Media/Albums
+
+/Users/Profile?userid=<user_id> GET:
+   checkUserId ->
+      rossz: redirect to /About
