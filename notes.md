@@ -336,3 +336,14 @@ Login policy:
 /Users/Profile?userid=<user_id> GET:
    checkUserId ->
       rossz: redirect to /About
+
+
+
+hotswap:
+https://weblog.west-wind.com/posts/2019/May/18/Live-Reloading-Server-Side-ASPNET-Core-Apps
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/dotnet-watch?view=aspnetcore-3.1
+
+unit tesztelés:
+https://docs.microsoft.com/en-us/aspnet/core/test/razor-pages-tests?view=aspnetcore-3.1
+https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
+https://wellsb.com/csharp/aspnet/xunit-unit-test-razor-pages/
