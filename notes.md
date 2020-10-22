@@ -244,20 +244,20 @@ https://www.mikesdotnetting.com/article/324/areas-in-razor-pages
 https://www.learnrazorpages.com/razor-pages/routing
 
 Routingom:
-GET         Anyone         /, /Index
+   GET         Anyone         /, /Index
 GET, POST   Login          /Users/Profile/Edit
-GET         Anyone         /Users/Profile?userid=<user_id>
-GET, POST   Anyone         /Users/Login
+   GET         Anyone         /Users/Profile?userid=<user_id>
+   GET, POST   Anyone         /Users/Login
 GET         Login          /Users/Logout
 GET, POST   Login, Admin   /Users/Invite
 GET, POST   Login, Admin   /Users/Ban
-GET, POST   Anyone         /Users/Register?token=<register_token>
-GET         Anyone         /About
+   GET, POST   Anyone         /Users/Register?token=<register_token>
+   GET         Anyone         /About
 --/Error
 GET, POST   Login          /Media/Upload
-GET         Anyone         /Media/Albums
-GET         Anyone         /Media/Albums/View?albumid=<album_id>
-GET         Anyone         /Media/Videos
+   GET         Anyone         /Media/Albums
+   GET         Anyone         /Media/Albums/View?albumid=<album_id>
+   GET         Anyone         /Media/Videos
 GET, POST   Login, Admin   /Media/Moderate
 
 Hookok:
@@ -347,3 +347,48 @@ unit tesztelés:
 https://docs.microsoft.com/en-us/aspnet/core/test/razor-pages-tests?view=aspnetcore-3.1
 https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
 https://wellsb.com/csharp/aspnet/xunit-unit-test-razor-pages/
+
+dotnet new sln --name WebGallery
+dotnet sln add web_gallery/web_gallery.csproj
+dotnet sln add UnitTesting.Tests/UnitTesting.Tests.csproj
+
+DB modell:
+-Userek
+-Albumok
+-Képek
+-Videó linkek
+
+UserDb
+-> Users(id, email, Details(name, short_descrpition), salt, hashed_pw, Permissions(type))
+-> Tokens(token, created)
+
+MediaDb
+-> Albums(id, Details(name, description, tags), created, is_public, resource_link)
+-> Videos(id, link, Details(name, description, tags), created, is_public)
+
+https://stackoverflow.com/questions/42912755/how-to-create-a-db-for-mongodb-container-on-start-up
+https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm
+-> autoIndex opció, createIndex
+https://docs.mongodb.com/manual/indexes/
+https://docs.mongodb.com/manual/core/index-unique/#index-type-unique
+timestamping:
+https://medium.com/@es1amaged/stop-using-created-at-with-mongodb-a9d03e6b5385
+-> ObjectId("5f91294a98073262992793f9").getTimestamp()
+
+
+use UserDb
+
+db.users.insertMany([{email: "user@example.com", Details: {name: "User Name", description: "short description"}, salt: "random_salt", password: "hashed_pw", Permissions: {user_type: "editor"}}, {email: "admin@example.com", Details: {name: "User Name", description: "short description"}, salt: "random_salt", password: "hashed_pw", Permissions: {user_type: "admin"}}])
+
+db.tokens.insertOne({token: "token_hash"})
+
+use MediaDb
+
+db.albums.insertMany([{Details: {name: "Album Name", description: "short description", tags: ["tag1", "tag2"]}, is_public: true, resource_link: "resource_url"}, {Details: {name: "Album Name", description: "short description", tags: ["tag3"]}, is_public: false, resource_link: "resource_url"}])
+
+db.videos.insertMany([{resource_link: "resource_url", Details: {name: "Video Name", description: "short description", tags: ["tag1", "tag3"]}, is_public: true}, {resource_link: "resource_url", Details: {name: "Video Name", description: "short description", tags: ["tag3"]}, is_public: false}])  
+
+
+nullable DTO class:
+https://docs.microsoft.com/en-us/dotnet/csharp/nullable-migration-strategies
+
