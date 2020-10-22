@@ -392,3 +392,83 @@ db.videos.insertMany([{resource_link: "resource_url", Details: {name: "Video Nam
 nullable DTO class:
 https://docs.microsoft.com/en-us/dotnet/csharp/nullable-migration-strategies
 
+db.Users.insertMany([
+   {
+      Email: "user@example.com", 
+      Details: {
+         Name: "User Name", 
+         Description: "short description"
+      }, 
+      Salt: "random_salt", 
+      Password: "hashed_pw", 
+      Permissions: {
+         User_type: "editor"
+      }
+   }, 
+   {
+      Email: "admin@example.com", 
+      Details: {
+         Name: "User Name", 
+         Description: "short description"
+      }, 
+      Salt: "random_salt", 
+      Password: "hashed_pw", 
+      Permissions: {
+         User_type: "admin"
+      }
+   }
+])
+
+db.Tokens.insertOne({
+      Value: "token_hash"
+   })
+
+use MediaDb
+
+db.Albums.insertMany([
+   {
+      Details: {
+         Name: "Album Name", 
+         Description: "short description", 
+         Tags: ["tag1", "tag2"]
+      }, 
+      Is_public: true, 
+      Resource_link: "resource_url"
+   }, 
+   {
+      Details: {
+         Name: "Album Name", 
+         Description: "short description", 
+         Tags: ["tag3"]
+      }, 
+      Is_public: false, 
+      Resource_link: "resource_url"
+   }
+])
+
+db.Videos.insertMany([
+   {
+      Resource_link: "resource_url", 
+      Details: {
+         Name: "Video Name", 
+         Description: "short description", 
+         Tags: ["tag1", "tag3"]
+      }, 
+      Is_public: true
+   }, 
+   {
+      Resource_link: "resource_url", 
+      Details: {
+         Name: "Video Name", 
+         Description: "short description", 
+         Tags: ["tag3"]
+      }, 
+      Is_public: false
+   }
+])  
+
+
+# TODO: reference ("CreatedBy" mező a MediaDb-ben)
+
+nullable DTO class:
+https://docs.microsoft.com/en-us/dotnet/csharp/nullable-migration-strategies
