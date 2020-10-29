@@ -5,11 +5,8 @@ using System.ComponentModel;
 
 namespace web_gallery.Models.Users
 {
-    public class User
+    public class User : Model
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = null!;
         [BsonRequired]
         public string Mail { get; set; } = null!;
         [BsonRequired]

@@ -3,11 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace web_gallery.Models.Users
 {
-    public class Token
+    public class Token : Model
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = null!;
         [BsonRequired]
         public string Value { get; set; } = null!;
     }

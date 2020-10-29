@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using web_gallery.Models;
+using Microsoft.Extensions.Options;
 
 namespace web_gallery
 {
@@ -21,9 +24,23 @@ namespace web_gallery
 
         public IConfiguration Configuration { get; }
 
+        protected void ConfigureDatabase<T, I>(IServiceCollection services)
+            where T : class, I, new()
+            where I : IDatabaseSettings
+        {
+            services.Configure<T>(
+                Configuration.GetSection(nameof(T)));
+
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<T>>().Value);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            this.ConfigureDatabase<UsersDatabaseSettings, IUsersDatabaseSettings>(services);
+            this.ConfigureDatabase<MediaDatabaseSettings, IMediaDatabaseSettings>(services);
+
             services.AddRazorPages();
             services.AddAuthorization(options =>
             {
