@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace web_gallery.Services
 {
-     public class MongoService<DbElement, IDbSettings>
+     public abstract class MongoService<DbElement, IDbSettings>
         where DbElement : Models.Model
         where IDbSettings : IDatabaseSettings
     {
@@ -40,5 +40,27 @@ namespace web_gallery.Services
 
         public void Remove(string id) => 
             _elements.DeleteOne(element => element.Id == id);
+    }
+
+    // Media
+    public class AlbumService : MongoService<Models.Media.Album, IMediaDatabaseSettings>
+    {
+        public AlbumService(IMediaDatabaseSettings settings) : base(settings, settings.AlbumCollectionName) {}
+    }
+
+    public class VideoService : MongoService<Models.Media.Video, IMediaDatabaseSettings>
+    {
+        public VideoService(IMediaDatabaseSettings settings) : base(settings, settings.VideoCollectionName) {}
+    }
+
+    // Users
+    public class UserService : MongoService<Models.Users.User, IUsersDatabaseSettings>
+    {
+        public UserService(IUsersDatabaseSettings settings) : base(settings, settings.UserCollectionName) {}
+    }
+
+    public class TokenService : MongoService<Models.Users.Token, IUsersDatabaseSettings>
+    {
+        public TokenService(IUsersDatabaseSettings settings) : base(settings, settings.TokenCollectionName) {}
     }
 }

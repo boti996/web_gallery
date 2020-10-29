@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Collections.Immutable;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using web_gallery.Models;
 using Microsoft.Extensions.Options;
+using web_gallery.Services;
 
 namespace web_gallery
 {
@@ -40,6 +43,11 @@ namespace web_gallery
         {
             this.ConfigureDatabase<UsersDatabaseSettings, IUsersDatabaseSettings>(services);
             this.ConfigureDatabase<MediaDatabaseSettings, IMediaDatabaseSettings>(services);
+
+            services.AddSingleton<Services.AlbumService>();
+            services.AddSingleton<Services.VideoService>();
+            services.AddSingleton<Services.UserService>();
+            services.AddSingleton<Services.TokenService>();
 
             services.AddRazorPages();
             services.AddAuthorization(options =>
