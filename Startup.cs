@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using web_gallery.Models;
 using Microsoft.Extensions.Options;
 using web_gallery.Services;
+using AspNetCore.Identity.Mongo;
 
 namespace web_gallery
 {
@@ -29,12 +30,12 @@ namespace web_gallery
 
         protected void ConfigureDatabase<T, I>(IServiceCollection services)
             where T : class, I, new()
-            where I : IDatabaseSettings
+            where I : class, IDatabaseSettings
         {
             services.Configure<T>(
-                Configuration.GetSection(nameof(T)));
+                Configuration.GetSection(typeof(T).Name));
 
-            services.AddSingleton<IDatabaseSettings>(sp =>
+            services.AddSingleton<I>(sp =>
                 sp.GetRequiredService<IOptions<T>>().Value);
         }
 
@@ -48,7 +49,20 @@ namespace web_gallery
             services.AddSingleton<Services.VideoService>();
             services.AddSingleton<Services.UserService>();
             services.AddSingleton<Services.TokenService>();
-
+            /*
+            services.AddIdentityMongoDbProvider<
+                AspNetCore.Identity.Mongo.Model.MongoUser, 
+                AspNetCore.Identity.Mongo.Model.MongoRole>(identityOptions =>
+                {
+                    identityOptions.Password.RequiredLength = 6;
+                    identityOptions.Password.RequireLowercase = false;
+                    identityOptions.Password.RequireUppercase = false;
+                    identityOptions.Password.RequireNonAlphanumeric = false;
+                    identityOptions.Password.RequireDigit = false;
+                }, mongoIdentityOptions => {
+                    mongoIdentityOptions.ConnectionString = "mongodb://localhost:27017/UserDb";
+                });
+            */
             services.AddRazorPages();
             services.AddAuthorization(options =>
             {
