@@ -49,26 +49,51 @@ namespace web_gallery
             services.AddSingleton<Services.VideoService>();
             services.AddSingleton<Services.UserService>();
             services.AddSingleton<Services.TokenService>();
-            /*
+
             services.AddIdentityMongoDbProvider<
                 AspNetCore.Identity.Mongo.Model.MongoUser, 
                 AspNetCore.Identity.Mongo.Model.MongoRole>(identityOptions =>
                 {
+                    // Password settings
                     identityOptions.Password.RequiredLength = 6;
                     identityOptions.Password.RequireLowercase = false;
                     identityOptions.Password.RequireUppercase = false;
                     identityOptions.Password.RequireNonAlphanumeric = false;
                     identityOptions.Password.RequireDigit = false;
+                    // Lockout settings
+                    identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    identityOptions.Lockout.MaxFailedAccessAttempts = 5;
+                    identityOptions.Lockout.AllowedForNewUsers = true;
+                    // User settings
+                    identityOptions.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    identityOptions.User.RequireUniqueEmail = false;
+                
                 }, mongoIdentityOptions => {
                     mongoIdentityOptions.ConnectionString = "mongodb://localhost:27017/UserDb";
                 });
-            */
-            services.AddRazorPages();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
             services.AddAuthorization(options =>
             {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
+
+                options.AddPolicy(PolicyNames.RequireAdminRole, policy => 
+                {
+                    policy.RequireRole("Admin");
+                });
             });
         }
 
@@ -91,6 +116,7 @@ namespace web_gallery
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
