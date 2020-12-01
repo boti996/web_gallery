@@ -42,6 +42,8 @@ namespace web_gallery
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
             this.ConfigureDatabase<UsersDatabaseSettings, IUsersDatabaseSettings>(services);
             this.ConfigureDatabase<MediaDatabaseSettings, IMediaDatabaseSettings>(services);
 

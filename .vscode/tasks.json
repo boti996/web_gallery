@@ -28,9 +28,18 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/web_gallery.csproj"
+                "${workspaceFolder}/web_gallery.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
             ],
             "problemMatcher": "$tsc"
+        },
+        {
+            "label": "build_with_watch",
+            "dependsOn": [
+                "build",
+                "watch",
+            ]
         }
     ]
 }
