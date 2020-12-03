@@ -53,7 +53,7 @@ namespace web_gallery
             services.AddSingleton<Services.TokenService>();
 
             services.AddIdentityMongoDbProvider<
-                AspNetCore.Identity.Mongo.Model.MongoUser, 
+                Models.Users.User, 
                 AspNetCore.Identity.Mongo.Model.MongoRole>(identityOptions =>
                 {
                     // Password settings
@@ -75,14 +75,16 @@ namespace web_gallery
                     mongoIdentityOptions.ConnectionString = "mongodb://localhost:27017/UserDb";
                 });
 
+            services.AddRazorPages();
+
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Users/Login";
+                options.AccessDeniedPath = "/Warning";
                 options.SlidingExpiration = true;
             });
 
@@ -119,7 +121,7 @@ namespace web_gallery
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization(); 
 
             app.UseEndpoints(endpoints =>
             {

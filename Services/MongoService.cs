@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace web_gallery.Services
 {
-     public abstract class MongoService<DbElement, IDbSettings>
-        where DbElement : Models.Model
+     public abstract class MongoService<TId, DbElement, IDbSettings>
+        where DbElement : Models.Model<TId>
         where IDbSettings : IDatabaseSettings
     {
         private readonly IMongoCollection<DbElement> _elements;
@@ -24,7 +24,7 @@ namespace web_gallery.Services
             _elements.Find(element => true).ToList();
 
         public DbElement Get(string id) =>
-            _elements.Find<DbElement>(element => element.Id == id).FirstOrDefault();
+            _elements.Find<DbElement>(element => element!.Id!.ToString() == id).FirstOrDefault();
 
         public DbElement Create(DbElement element)
         {
@@ -33,13 +33,20 @@ namespace web_gallery.Services
         }
 
         public void Update(string id, DbElement elementIn) =>
-            _elements.ReplaceOne(element => element.Id == id, elementIn);
+            _elements.ReplaceOne(element => element.Id!.ToString() == id, elementIn);
 
         public void Remove(DbElement elementIn) =>
-            _elements.DeleteOne(element => element.Id == elementIn.Id);
+            _elements.DeleteOne(element => element.Id!.ToString() == elementIn.Id!.ToString());
 
         public void Remove(string id) => 
-            _elements.DeleteOne(element => element.Id == id);
+            _elements.DeleteOne(element => element.Id!.ToString() == id);
+    }
+
+    public abstract class MongoService<DbElement, IDbSettings> : MongoService<string, DbElement, IDbSettings>
+        where DbElement : Models.Model<string>
+        where IDbSettings : IDatabaseSettings
+    {
+        public MongoService(IDbSettings settings, string collectionName) : base(settings, collectionName) {}
     }
 
     // Media
@@ -47,14 +54,14 @@ namespace web_gallery.Services
     {
         public AlbumService(IMediaDatabaseSettings settings) : base(settings, settings.AlbumCollectionName) {}
     }
-
+    
     public class VideoService : MongoService<Models.Media.Video, IMediaDatabaseSettings>
     {
         public VideoService(IMediaDatabaseSettings settings) : base(settings, settings.VideoCollectionName) {}
     }
 
     // Users
-    public class UserService : MongoService<Models.Users.User, IUsersDatabaseSettings>
+    public class UserService : MongoService<MongoDB.Bson.ObjectId, Models.Users.User, IUsersDatabaseSettings>
     {
         public UserService(IUsersDatabaseSettings settings) : base(settings, settings.UserCollectionName) {}
     }

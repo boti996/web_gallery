@@ -1,12 +1,11 @@
+using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace web_gallery.Models
 {
-    public abstract class Model
+    public interface Model<TId>
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = null!;
+        public TId Id { get; set; }
     }
 }

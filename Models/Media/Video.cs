@@ -3,8 +3,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace web_gallery.Models.Media
 {
-    public class Video : Model
+    public class Video : Model<string>
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = null!;
         [BsonRequired]
         public Details Details { get; set; } = null!;
         [BsonRequired]

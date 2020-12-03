@@ -2,10 +2,11 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel;
+using AspNetCore.Identity.Mongo.Model;
 
 namespace web_gallery.Models.Users
 {
-    public class User : Model
+    public class User : MongoUser, Model<ObjectId>
     {
         [BsonRequired]
         public string Mail { get; set; } = null!;
