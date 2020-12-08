@@ -472,3 +472,9 @@ db.Videos.insertMany([
 
 nullable DTO class:
 https://docs.microsoft.com/en-us/dotnet/csharp/nullable-migration-strategies
+
+
+docker containerek lathatova tetele egymas szamara:
+https://docs.docker.com/config/containers/container-networking/
+docker-compose pelda:
+https://stackoverflow.com/questions/57997583/webapi-doest-not-see-mongodb-in-docker-compose
