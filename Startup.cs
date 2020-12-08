@@ -49,8 +49,8 @@ namespace web_gallery
 
             services.AddSingleton<Services.AlbumService>();
             services.AddSingleton<Services.VideoService>();
-            services.AddSingleton<Services.UserService>();
-            services.AddSingleton<Services.TokenService>();
+            //services.AddSingleton<Services.UserService>();
+            //services.AddSingleton<Services.TokenService>();
 
             services.AddIdentityMongoDbProvider<
                 Models.Users.User, 
@@ -72,7 +72,7 @@ namespace web_gallery
                     identityOptions.User.RequireUniqueEmail = false;
                 
                 }, mongoIdentityOptions => {
-                    mongoIdentityOptions.ConnectionString = "mongodb://0.0.0.0:27017/UserDb";
+                    mongoIdentityOptions.ConnectionString = "mongodb://mongo_onlab:27017/UserDb";
                 });
 
             services.AddRazorPages();

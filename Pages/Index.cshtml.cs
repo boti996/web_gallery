@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using web_gallery.Services;
 
 namespace web_gallery.Pages
 {
@@ -21,7 +22,6 @@ namespace web_gallery.Pages
 
         public void OnGet()
         {
-
         }
     }
 }

@@ -6,12 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1" />
     <PackageReference Include="Microsoft.NETCore.Targets" Version="3.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.11.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.5" />
     <PackageReference Include="AspNetCore.Identity.Mongo" Version="6.7.2" />
   </ItemGroup>
 

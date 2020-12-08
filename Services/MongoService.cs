@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using web_gallery.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace web_gallery.Services
 {
@@ -14,10 +15,12 @@ namespace web_gallery.Services
 
         public MongoService(IDbSettings settings, string collectionName)
         {
+            Debug.WriteLine($"Service getting database: {settings.DatabaseName} from connection: {settings.ConnectionString}");
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _elements = database.GetCollection<DbElement>(collectionName);
+            Debug.WriteLine($"Getting database was successful: {_elements}");
         }
 
         public List<DbElement> Get() => 

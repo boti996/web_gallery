@@ -6,4 +6,8 @@
 
 <div class="text-center">
     <p>Album previews come here</p>
+    <ul>
+        @foreach (var album in @Model.Albums)
+            {<li>@album.Id</li>}
+    </ul>
 </div>
