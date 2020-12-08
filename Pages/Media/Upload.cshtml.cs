@@ -10,9 +10,9 @@ namespace web_gallery.Pages
 {
     public class MediaUploadModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<MediaUploadModel> _logger;
 
-        public MediaUploadModel(ILogger<IndexModel> logger)
+        public MediaUploadModel(ILogger<MediaUploadModel> logger)
         {
             _logger = logger;
         }

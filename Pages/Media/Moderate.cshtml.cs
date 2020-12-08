@@ -12,9 +12,9 @@ namespace web_gallery.Pages
     [Authorize(Policy = PolicyNames.RequireAdminRole)]
     public class MediaModerateModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<MediaModerateModel> _logger;
 
-        public MediaModerateModel(ILogger<IndexModel> logger)
+        public MediaModerateModel(ILogger<MediaModerateModel> logger)
         {
             _logger = logger;
         }

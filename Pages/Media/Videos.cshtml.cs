@@ -12,9 +12,9 @@ namespace web_gallery.Pages
     [AllowAnonymous]
     public class VideosModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<VideosModel> _logger;
 
-        public VideosModel(ILogger<IndexModel> logger)
+        public VideosModel(ILogger<VideosModel> logger)
         {
             _logger = logger;
         }

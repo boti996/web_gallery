@@ -10,9 +10,9 @@ namespace web_gallery.Pages
 {
     public class UserEditModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<UserEditModel> _logger;
 
-        public UserEditModel(ILogger<IndexModel> logger)
+        public UserEditModel(ILogger<UserEditModel> logger)
         {
             _logger = logger;
         }

@@ -12,9 +12,9 @@ namespace web_gallery.Pages
     [Authorize(Policy = PolicyNames.RequireAdminRole)]
     public class UserBanModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<UserBanModel> _logger;
 
-        public UserBanModel(ILogger<IndexModel> logger)
+        public UserBanModel(ILogger<UserBanModel> logger)
         {
             _logger = logger;
         }

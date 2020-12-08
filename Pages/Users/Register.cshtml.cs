@@ -21,10 +21,12 @@ namespace web_gallery.Pages
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { set; get; } = null!;
+        [BindProperty]
         [Display(Name = "Your password")]
         [Required]
         [DataType(DataType.Password)]
         public string Password { set; get; } = null!;
+        [BindProperty]
         [Display(Name = "Confirm your password")]
         [Required]
         [DataType(DataType.Password)]
@@ -33,10 +35,11 @@ namespace web_gallery.Pages
 
         private readonly UserManager<Models.Users.User> _userManager;
         private readonly SignInManager<Models.Users.User> _signInManager;
-        private readonly ILogger<IndexModel> _logger;
+        //private readonly IEmailSender _sender;
+        private readonly ILogger<UserRegisterModel> _logger;
 
         public UserRegisterModel(
-            ILogger<IndexModel> logger, 
+            ILogger<UserRegisterModel> logger, 
             UserManager<Models.Users.User> userManager, 
             SignInManager<Models.Users.User> signInManager)
         {
@@ -50,9 +53,14 @@ namespace web_gallery.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
-            if (!ModelState.IsValid)
+            returnUrl = returnUrl ?? Url.Content("~/");
+            /* TODO: ??
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
+                                          .ToList();
+            */
+            if (ModelState.IsValid)
             {
                 return Page();
             }
@@ -64,15 +72,39 @@ namespace web_gallery.Pages
             {
                 _logger.LogInformation("User created a new account with password.");
 
-                //Send confirmation email
-                //var code = await userManager.GenerateEmailConfirmationTokenAsync(registeredUser);
-                //var callbackUrl = Url.EmailConfirmationLink(registeredUser.Id.ToString(), code, Request.Scheme);
-                //await emailSender.SendEmailAsync(Email, callbackUrl, "");
+                /* TODO: Send confirmation email
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(registeredUser);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = uregisteredUserser.Id, code = code },
+                protocol: Request.Scheme);
+
+                await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                {
+                    return RedirectToPage("RegisterConfirmation", 
+                                        new { email = Email });
+                }
+                else
+                {
+                    await _signInManager.SignInAsync(registeredUser, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
+                */
 
                 await _signInManager.SignInAsync(user: registeredUser, isPersistent: false);
+                return LocalRedirect(returnUrl);
             }
 
-            return RedirectToPage("./Index");
+            foreach (var error in registrationResult.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return Page();
         }
     }
 }

@@ -13,9 +13,9 @@ namespace web_gallery.Pages
     [Authorize(Policy = PolicyNames.RequireAdminRole)]
     public class UserInviteModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<UserInviteModel> _logger;
 
-        public UserInviteModel(ILogger<IndexModel> logger)
+        public UserInviteModel(ILogger<UserInviteModel> logger)
         {
             _logger = logger;
         }

@@ -72,7 +72,7 @@ namespace web_gallery
                     identityOptions.User.RequireUniqueEmail = false;
                 
                 }, mongoIdentityOptions => {
-                    mongoIdentityOptions.ConnectionString = "mongodb://localhost:27017/UserDb";
+                    mongoIdentityOptions.ConnectionString = "mongodb://0.0.0.0:27017/UserDb";
                 });
 
             services.AddRazorPages();

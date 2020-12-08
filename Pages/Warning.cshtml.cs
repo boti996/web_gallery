@@ -10,11 +10,11 @@ using Microsoft.Extensions.Logging;
 namespace web_gallery.Pages
 {
     [AllowAnonymous]
-    public class Warning2Model : PageModel
+    public class WarningModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<WarningModel> _logger;
 
-        public Warning2Model(ILogger<IndexModel> logger)
+        public WarningModel(ILogger<WarningModel> logger)
         {
             _logger = logger;
         }

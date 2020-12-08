@@ -7,10 +7,15 @@
 <div class="text-center">
     <!-- LOGIN FORM -->
     <form method="post">
-  		<label for="email">Email:</label>
-        <input type="email" name="email"> 
-        <label for="password">Password: </label>
-        <input type="password" name="password">
-        <input type="submit"  value="Login">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control">
+
+        <label asp-for="Password" class="control-label"></label> 
+        <input asp-for="Password" class="form-control">
+        
+        <label asp-for="RememberMe" class="control-label"></label>
+        <input asp-for="RememberMe" class="form-control">
+        
+        <input type="submit" value="Register">
     </form>
 </div>

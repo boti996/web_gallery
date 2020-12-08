@@ -12,9 +12,9 @@ namespace web_gallery.Pages
     [AllowAnonymous]
     public class AboutModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<AboutModel> _logger;
 
-        public AboutModel(ILogger<IndexModel> logger)
+        public AboutModel(ILogger<AboutModel> logger)
         {
             _logger = logger;
         }

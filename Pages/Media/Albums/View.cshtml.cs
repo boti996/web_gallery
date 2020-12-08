@@ -12,9 +12,9 @@ namespace web_gallery.Pages
     [AllowAnonymous]
     public class AlbumViewModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<AlbumViewModel> _logger;
 
-        public AlbumViewModel(ILogger<IndexModel> logger)
+        public AlbumViewModel(ILogger<AlbumViewModel> logger)
         {
             _logger = logger;
         }

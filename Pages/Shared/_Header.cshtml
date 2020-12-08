@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Models.Users.User> SignInManager
+@inject UserManager<Models.Users.User> UserManager
+
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-page="/Index">web_gallery</a>
@@ -18,11 +22,11 @@
             </ul>
             <!-- Right-aligned -->
             <ul class="navbar-nav flex-grow-1">
-                @if (true)
+                @if (SignInManager.IsSignedIn(User))
                 {
                     @* Show profile name with a link to profile edit page *@
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">UserId</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">@User.Identity.Name</a>
                     </li>
                     @* Logout *@
                     <li class="nav-item">
