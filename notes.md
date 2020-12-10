@@ -478,3 +478,12 @@ docker containerek lathatova tetele egymas szamara:
 https://docs.docker.com/config/containers/container-networking/
 docker-compose pelda:
 https://stackoverflow.com/questions/57997583/webapi-doest-not-see-mongodb-in-docker-compose
+
+https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/configuration/overview?tabs=aspnetcore2x&view=aspnetcore-5.0#persistkeystofilesystem
+https://github.com/dotnet/aspnetcore/issues/2941
+
+https://aur.archlinux.org/packages/mongodb-compass/
+
+https://docs.mongodb.com/manual/reference/connection-string/
+
+https://stackoverflow.com/questions/40217623/redirect-to-login-when-unauthorized-in-asp-net-core/43401680
