@@ -487,3 +487,6 @@ https://aur.archlinux.org/packages/mongodb-compass/
 https://docs.mongodb.com/manual/reference/connection-string/
 
 https://stackoverflow.com/questions/40217623/redirect-to-login-when-unauthorized-in-asp-net-core/43401680
+
+https://videojs.com/getting-started/
+https://azure.microsoft.com/en-us/services/key-vault/
