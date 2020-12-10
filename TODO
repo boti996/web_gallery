@@ -1,0 +1,71 @@
+UI:
+    -Bootstrap template
+    -Load more
+    -Album grid
+    -Image view + DL button
+    -Video.JS
+    -Filter by name, date and tags
+DB:
+    -Azure Bblob Storage
+    -Compression: preview, normal view, original (only for downloading)
+    -Queue for downloading original sized images
+    -Vauult for persistency decryption key Storage
+    -Load images
+Meta:
+    -Docker-compose for the 2 containers
+    -Docker init script for permissions, watcher
+    -DB init script
+    -Tests
+Code:
+    -Delete unneccessary dependencies
+    -Delete unneccessary imports
+    -Format code ~ convention
+Views:
+    -Gallery grid
+    -Enlarge image
+    -Download original image
+Albums:
+    -Album grid
+    -Details
+    -tags
+    -Filtering
+    -Load more
+    -Album previews
+Videos:
+    -Videos list
+    -Details
+    -tags
+    -Filtering
+    -shared code with Albums
+    -Share video direct link
+    -Load more
+Upload:
+    -Create Album
+    -Upload Images to blob storage
+    -Option to choose between video or image upload
+    -Delayed publishing
+Ban:
+    -Select user
+    -Reason
+Invite:
+    -Form with email field and send button
+    -Send email with registration token
+About:
+    -Lost profile details as partial
+    -Load social media links
+Warning:
+    -Connect to everywhere
+Edit profile:
+    -Edit password (confirm)
+    -Modify email address
+    -Confirmation mail when user is setting new email address
+Login:
+    -Forget Password email: reset link new password
+    -Remember me
+Register:
+    -ConfirmPw should work
+    -Identity restrictions & connecting feedback should be visible on UI as messages
+Moderate:
+    -List latest changes
+    -Undo changes
+    -Load more
