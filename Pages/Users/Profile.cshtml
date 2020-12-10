@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "User profile";
 }
-
 <div class="text-center">
-    <p>UserId's profile comes here</p>
+    <ul>
+        <li>@User.Identity.Name</li>
+        @* TODO: get user details & make this snippet loadable into another page *@
+    </ul>
 </div>

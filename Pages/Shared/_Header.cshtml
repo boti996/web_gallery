@@ -9,36 +9,45 @@
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Menu elements -->
+        @* Menu elements *@
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-            <!-- Left-aligned -->
+            @* User Menu *@
             <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Media/Albums">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Media/Videos">Videos</a>
+                </li>
             </ul>
-            <!-- Right-aligned -->
+            @* Editor menu *@
             <ul class="navbar-nav flex-grow-1">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    @* Show profile name with a link to profile edit page *@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Users/Profile/Edit">@User.Identity.Name</a>
                     </li>
-                    @* Logout *@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Users/Logout">Logout</a>
                     </li>
-                    @* Upload *@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Media/Upload">Upload</a>
                     </li>
-                    @if (true) {
+                    @* Admin menu *@
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Invite">Invite</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Invite">Invite new editor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Ban">Ban editor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Media/Moderate">Moderate media</a>
                         </li>
                     }
                 }
