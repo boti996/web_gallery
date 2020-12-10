@@ -11,7 +11,7 @@ namespace web_gallery.Services
         where DbElement : Models.Model<TId>
         where IDbSettings : IDatabaseSettings
     {
-        private readonly IMongoCollection<DbElement> _elements;
+        protected readonly IMongoCollection<DbElement> _elements;
 
         public MongoService(IDbSettings settings, string collectionName)
         {
@@ -72,5 +72,8 @@ namespace web_gallery.Services
     public class TokenService : MongoService<Models.Users.Token, IUsersDatabaseSettings>
     {
         public TokenService(IUsersDatabaseSettings settings) : base(settings, settings.TokenCollectionName) {}
+
+        public Models.Users.Token GetByValue(string value) =>
+            _elements.Find<Models.Users.Token>(element => element.Value == value).FirstOrDefault();
     }
 }

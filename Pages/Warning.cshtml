@@ -2,9 +2,15 @@
 @model WarningModel
 @{
     ViewData["Title"] = "Warning";
+    var redirectContent = $"{Preferences.DefaultRedirectInSeconds}; url=\"{Model.ReturnUrl}\"";
+}
+@section header {
+    <meta http-equiv="refresh" content="@redirectContent">
 }
 
 <div class="text-center">
-    
-    <p>Access denied.</p>
+    <p>Warning:</p>
+    <p>@Model.WarningMessage</p>
+    <p>Redirecting to '@Model.ReturnUrl' in @Preferences.DefaultRedirectInSeconds seconds...</p>
+
 </div>

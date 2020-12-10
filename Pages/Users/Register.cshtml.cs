@@ -10,29 +10,37 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using web_gallery.Services;
+using System.Diagnostics;
 
 namespace web_gallery.Pages
 {
     [AllowAnonymous]
     public class UserRegisterModel : PageModel
     {
+        [BindProperty(SupportsGet=true)]
+        public string? Token { get; set; }
+
         [BindProperty]
         [Display(Name = "Email address")]
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { set; get; } = null!;
+
         [BindProperty]
-        [Display(Name = "Your password")]
+        [Display(Name = "Password")]
         [Required]
         [DataType(DataType.Password)]
         public string Password { set; get; } = null!;
+
         [BindProperty]
-        [Display(Name = "Confirm your password")]
+        [Display(Name = "Confirm password")]
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Confirm password doesn't match.")]
+        //[Compare("Password", ErrorMessage = "Confirm password doesn't match.")]
         public string PasswordConfirm { set; get; } = null!;
 
+        private readonly TokenService _tokenService;
         private readonly UserManager<Models.Users.User> _userManager;
         private readonly SignInManager<Models.Users.User> _signInManager;
         //private readonly IEmailSender _sender;
@@ -41,15 +49,23 @@ namespace web_gallery.Pages
         public UserRegisterModel(
             ILogger<UserRegisterModel> logger, 
             UserManager<Models.Users.User> userManager, 
-            SignInManager<Models.Users.User> signInManager)
+            SignInManager<Models.Users.User> signInManager,
+            TokenService tokenService)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
-
-        public IActionResult OnGet()
+        public IActionResult OnGet(string token)
         {
+            Debug.WriteLine($"token: {token}");
+            var tokenFromDb = _tokenService.GetByValue(token);
+            if (tokenFromDb == null || !Preferences.isValidRegistrationToken(tokenFromDb))
+            {
+                return RedirectToPage("/Warning", new {warningMessage=WarningMessages.RegistrationTokenInvalid});
+            }
+            Debug.WriteLine("Register token was valid.");
             return Page();
         }
 
@@ -60,11 +76,14 @@ namespace web_gallery.Pages
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
                                           .ToList();
             */
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToPage("/Warning", new { warningMessage=string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage)),
+                                        returnUrl=$"/Users/Register?token={Token}"});
             }
-
+            Debug.WriteLine($"User {Email} is being created..");
             var registeredUser = new Models.Users.User { UserName = Email, Email = Email };
             var registrationResult = await _userManager.CreateAsync(registeredUser, Password);
 

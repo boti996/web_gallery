@@ -16,6 +16,7 @@ using web_gallery.Models;
 using Microsoft.Extensions.Options;
 using web_gallery.Services;
 using AspNetCore.Identity.Mongo;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace web_gallery
 {
@@ -44,13 +45,18 @@ namespace web_gallery
         {
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
+            
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new System.IO.DirectoryInfo("../"))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
+
             this.ConfigureDatabase<UsersDatabaseSettings, IUsersDatabaseSettings>(services);
             this.ConfigureDatabase<MediaDatabaseSettings, IMediaDatabaseSettings>(services);
 
             services.AddSingleton<Services.AlbumService>();
             services.AddSingleton<Services.VideoService>();
-            //services.AddSingleton<Services.UserService>();
-            //services.AddSingleton<Services.TokenService>();
+            services.AddSingleton<Services.UserService>();
+            services.AddSingleton<Services.TokenService>();
 
             services.AddIdentityMongoDbProvider<
                 Models.Users.User, 
@@ -69,7 +75,7 @@ namespace web_gallery
                     // User settings
                     identityOptions.User.AllowedUserNameCharacters =
                         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                    identityOptions.User.RequireUniqueEmail = false;
+                    identityOptions.User.RequireUniqueEmail = true;
                 
                 }, mongoIdentityOptions => {
                     mongoIdentityOptions.ConnectionString = "mongodb://mongo_onlab:27017/UserDb";
@@ -84,6 +90,7 @@ namespace web_gallery
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
                 options.LoginPath = "/Users/Login";
+                options.LogoutPath = "/Users/Logout";
                 options.AccessDeniedPath = "/Warning";
                 options.SlidingExpiration = true;
             });
