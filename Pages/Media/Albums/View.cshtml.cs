@@ -19,9 +19,11 @@ namespace web_gallery.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(string id)
         {
-
+            // TODO: check id validity
+            // TODO: get album detaiuls
+            // TODO: get images from resource link
         }
     }
 }

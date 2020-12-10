@@ -5,5 +5,19 @@
 }
 
 <div class="text-center">
-    <p>Media upload form comes here</p>
+    <form method="post">
+        <label asp-for="AlbumSelect" class="control-label"></label>
+        <select asp-for="AlbumSelect" class="form-control">
+            <option value="">Create new album</option>
+            @foreach (var album in @Model.Albums)
+            {
+                <option value="@album.Id">@album.Id @album.Timestamp @album.Details.Name</option>
+            }
+        </select>
+
+        <label asp-for="ImageSelect" class="control-label"></label> 
+        <input type="file" asp-for="ImageSelect" class="form-control" multiple>
+
+        <input type="submit" value="Upload">
+    </form>
 </div>

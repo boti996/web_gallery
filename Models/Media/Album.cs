@@ -1,3 +1,4 @@
+using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -14,6 +15,8 @@ namespace web_gallery.Models.Media
         public bool Is_public { get; set; } = true;
         [BsonRequired]
         public string Resource_link { get; set; } = null!;
+        [BsonIgnore]
+        public DateTime Timestamp => new ObjectId(Id).CreationTime;
     }
 
 
