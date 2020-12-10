@@ -16,6 +16,7 @@ Meta:
     -Docker init script for permissions, watcher
     -DB init script
     -Tests
+    -Fix commits
 Code:
     -Delete unneccessary dependencies
     -Delete unneccessary imports
@@ -69,3 +70,23 @@ Moderate:
     -List latest changes
     -Undo changes
     -Load more
+
+Priority:
+    Delete unneccessary deps, imports
+    Reformat
+    Ban form
+    Invite form
+    Login add forget password form
+    Register debug confirm
+    Upload video vs image upload option
+    Invite form
+    About load partials
+    Edit form
+    Video.JS
+    Ayure Blob Storage
+    Album grid
+    Video list
+    Load more
+    Image enlarge view
+    Filter
+    Download image queue
