@@ -14,7 +14,7 @@ namespace web_gallery.Pages
         private readonly ILogger<VideosModel> _logger;
 
         [BindProperty]
-        public List<Models.Media.Video> Videos { get; set; } = new List<Models.Media.Video>{};
+        public List<Models.Media.Video> Videos { get; set; } = new List<Models.Media.Video> { };
 
         public VideosModel(ILogger<VideosModel> logger, VideoService videoService)
         {

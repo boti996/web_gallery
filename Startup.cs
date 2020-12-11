@@ -37,7 +37,7 @@ namespace web_gallery
         {
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            
+
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new System.IO.DirectoryInfo("../"))
                 .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
@@ -51,7 +51,7 @@ namespace web_gallery
             services.AddSingleton<Services.TokenService>();
 
             services.AddIdentityMongoDbProvider<
-                Models.Users.User, 
+                Models.Users.User,
                 AspNetCore.Identity.Mongo.Model.MongoRole>(identityOptions =>
                 {
                     // Password settings
@@ -68,8 +68,9 @@ namespace web_gallery
                     identityOptions.User.AllowedUserNameCharacters =
                         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     identityOptions.User.RequireUniqueEmail = true;
-                
-                }, mongoIdentityOptions => {
+
+                }, mongoIdentityOptions =>
+                {
                     mongoIdentityOptions.ConnectionString = "mongodb://mongo_onlab:27017/UserDb";
                 });
 
@@ -93,7 +94,7 @@ namespace web_gallery
                     .RequireAuthenticatedUser()
                     .Build();
 
-                options.AddPolicy(PolicyNames.RequireAdminRole, policy => 
+                options.AddPolicy(PolicyNames.RequireAdminRole, policy =>
                 {
                     policy.RequireRole("Admin");
                 });
@@ -120,7 +121,7 @@ namespace web_gallery
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization(); 
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

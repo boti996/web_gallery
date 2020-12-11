@@ -11,7 +11,7 @@ namespace web_gallery
     public static class WarningMessages
     {
         public const string Default = "Something went wrong!";
-        public const string RegistrationTokenInvalid = 
+        public const string RegistrationTokenInvalid =
             @"Missing or invalid registration token.
             Please ask for an invitation email from an Administrator!";
     }

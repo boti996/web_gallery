@@ -4,7 +4,7 @@
 	"name": "C# Sample",
 	"build": {
 		"dockerfile": "Dockerfile",
-		"args": { 
+		"args": {
 			// Update 'VARIANT' to pick a .NET Core version: 2.1-bionic, 3.1-bionic
 			"VARIANT": "3.1-bionic",
 			"INSTALL_NODE": "false",
@@ -12,20 +12,19 @@
 			"INSTALL_AZURE_CLI": "false"
 		}
 	},
-
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-dotnettools.csharp"
 	],
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [5000, 5001],
-
+	"forwardPorts": [
+		5000,
+		5001
+	],
 	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command:
 	//  * Windows PowerShell:
 	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
@@ -42,10 +41,8 @@
 		"ASPNETCORE_Kestrel__Certificates__Default__Password": "7Y1Jk7bkyiSEQL09",
 		"ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
 	},
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
-
 	// Comment this out to connect as a root instead.
 	"remoteUser": "vscode"
 }

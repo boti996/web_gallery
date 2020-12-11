@@ -17,7 +17,7 @@ namespace web_gallery.Pages
             _logger = logger;
         }
 
-        public void OnGet() {}
+        public void OnGet() { }
 
         public async Task<IActionResult> OnPost(string? returnUrl = null)
         {

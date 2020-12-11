@@ -14,7 +14,7 @@ namespace web_gallery.Pages
     [AllowAnonymous]
     public class UserRegisterModel : PageModel
     {
-        [BindProperty(SupportsGet=true)]
+        [BindProperty(SupportsGet = true)]
         public string? Token { get; set; }
 
         [BindProperty]
@@ -43,8 +43,8 @@ namespace web_gallery.Pages
         private readonly ILogger<UserRegisterModel> _logger;
 
         public UserRegisterModel(
-            ILogger<UserRegisterModel> logger, 
-            UserManager<Models.Users.User> userManager, 
+            ILogger<UserRegisterModel> logger,
+            UserManager<Models.Users.User> userManager,
             SignInManager<Models.Users.User> signInManager,
             TokenService tokenService)
         {
@@ -59,7 +59,7 @@ namespace web_gallery.Pages
             var tokenFromDb = _tokenService.GetByValue(token);
             if (tokenFromDb == null || !Preferences.isValidRegistrationToken(tokenFromDb))
             {
-                return RedirectToPage("/Warning", new {warningMessage=WarningMessages.RegistrationTokenInvalid});
+                return RedirectToPage("/Warning", new { warningMessage = WarningMessages.RegistrationTokenInvalid });
             }
             Debug.WriteLine("Register token was valid.");
             return Page();
@@ -74,10 +74,13 @@ namespace web_gallery.Pages
             */
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("/Warning", new { warningMessage=string.Join("; ", ModelState.Values
+                return RedirectToPage("/Warning", new
+                {
+                    warningMessage = string.Join("; ", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage)),
-                                        returnUrl=$"/Users/Register?token={Token}"});
+                    returnUrl = $"/Users/Register?token={Token}"
+                });
             }
             Debug.WriteLine($"User {Email} is being created..");
             var registeredUser = new Models.Users.User { UserName = Email, Email = Email };

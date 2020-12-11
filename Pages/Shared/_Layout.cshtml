@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <!-- HEAD -->
+
 <head>
-    <meta charset="utf-8" />    
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - web_gallery</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -10,6 +11,7 @@
     @RenderSection("header", required: false)
 </head>
 <!-- BODY -->
+
 <body>
     <!-- HEADER -->
     <header>
@@ -24,8 +26,8 @@
     <!-- FOOTER -->
     <footer class="border-top footer text-muted">
         <div class="container">
-        &copy; 2020 - web_gallery - <a asp-area="" asp-page="/About">About</a>
-    </div>
+            &copy; 2020 - web_gallery - <a asp-area="" asp-page="/About">About</a>
+        </div>
     </footer>
     <!-- SCRIPTS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -34,4 +36,5 @@
 
     @RenderSection("Scripts", required: false)
 </body>
+
 </html>

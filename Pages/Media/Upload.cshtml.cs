@@ -22,7 +22,7 @@ namespace web_gallery.Pages
         private readonly ILogger<MediaUploadModel> _logger;
 
         [BindProperty]
-        public List<Models.Media.Album> Albums { get; set; } = new List<Models.Media.Album>{};
+        public List<Models.Media.Album> Albums { get; set; } = new List<Models.Media.Album> { };
 
         public MediaUploadModel(ILogger<MediaUploadModel> logger, AlbumService albumService)
         {
@@ -35,7 +35,7 @@ namespace web_gallery.Pages
             Albums = _albumService.Get();
         }
 
-        public  IActionResult OnPost()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace web_gallery.Pages
             // TODO: create or select album
             // TODO: upload images and add link to album
 
-            return RedirectToPage("/Media/Albums/View", new { id=AlbumSelect });
+            return RedirectToPage("/Media/Albums/View", new { id = AlbumSelect });
         }
     }
 }

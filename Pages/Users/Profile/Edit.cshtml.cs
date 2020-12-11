@@ -19,7 +19,7 @@ namespace web_gallery.Pages
 
         public void OnPost()
         {
-            
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace web_gallery.Pages
 
         public void OnGet(string? warningMessage, string? returnUrl = null)
         {
-            ReturnUrl= returnUrl ?? Preferences.DefaultRedirectUrl;
+            ReturnUrl = returnUrl ?? Preferences.DefaultRedirectUrl;
             WarningMessage = warningMessage ?? WarningMessages.Default;
             var warning = $"Warning was occured: {WarningMessage}";
             Debug.WriteLine(warning);

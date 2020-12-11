@@ -22,7 +22,7 @@ namespace web_gallery.Services
             Debug.WriteLine($"Getting database was successful: {_elements}");
         }
 
-        public List<DbElement> Get() => 
+        public List<DbElement> Get() =>
             _elements.Find(element => true).ToList();
 
         public DbElement Get(string id) =>
@@ -40,7 +40,7 @@ namespace web_gallery.Services
         public void Remove(DbElement elementIn) =>
             _elements.DeleteOne(element => element.Id!.ToString() == elementIn.Id!.ToString());
 
-        public void Remove(string id) => 
+        public void Remove(string id) =>
             _elements.DeleteOne(element => element.Id!.ToString() == id);
     }
 
@@ -48,29 +48,29 @@ namespace web_gallery.Services
         where DbElement : Models.Model<string>
         where IDbSettings : IDatabaseSettings
     {
-        public MongoService(IDbSettings settings, string collectionName) : base(settings, collectionName) {}
+        public MongoService(IDbSettings settings, string collectionName) : base(settings, collectionName) { }
     }
 
     // Media
     public class AlbumService : MongoService<Models.Media.Album, IMediaDatabaseSettings>
     {
-        public AlbumService(IMediaDatabaseSettings settings) : base(settings, settings.AlbumCollectionName) {}
+        public AlbumService(IMediaDatabaseSettings settings) : base(settings, settings.AlbumCollectionName) { }
     }
-    
+
     public class VideoService : MongoService<Models.Media.Video, IMediaDatabaseSettings>
     {
-        public VideoService(IMediaDatabaseSettings settings) : base(settings, settings.VideoCollectionName) {}
+        public VideoService(IMediaDatabaseSettings settings) : base(settings, settings.VideoCollectionName) { }
     }
 
     // Users
     public class UserService : MongoService<MongoDB.Bson.ObjectId, Models.Users.User, IUsersDatabaseSettings>
     {
-        public UserService(IUsersDatabaseSettings settings) : base(settings, settings.UserCollectionName) {}
+        public UserService(IUsersDatabaseSettings settings) : base(settings, settings.UserCollectionName) { }
     }
 
     public class TokenService : MongoService<Models.Users.Token, IUsersDatabaseSettings>
     {
-        public TokenService(IUsersDatabaseSettings settings) : base(settings, settings.TokenCollectionName) {}
+        public TokenService(IUsersDatabaseSettings settings) : base(settings, settings.TokenCollectionName) { }
 
         public Models.Users.Token GetByValue(string value) =>
             _elements.Find<Models.Users.Token>(element => element.Value == value).FirstOrDefault();

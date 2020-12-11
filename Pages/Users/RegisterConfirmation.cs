@@ -15,7 +15,7 @@ public class RegisterConfirmationModel : PageModel
     private readonly ILogger<RegisterConfirmationModel> _logger;
 
     public RegisterConfirmationModel(
-        ILogger<RegisterConfirmationModel> logger, 
+        ILogger<RegisterConfirmationModel> logger,
         UserManager<IdentityUser> userManager) //, IEmailSender sender)
     {
         _logger = logger;

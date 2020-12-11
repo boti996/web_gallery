@@ -14,7 +14,7 @@ namespace web_gallery.Pages
         private readonly ILogger<AlbumsModel> _logger;
 
         [BindProperty]
-        public List<Models.Media.Album> Albums { get; set; } = new List<Models.Media.Album>{};
+        public List<Models.Media.Album> Albums { get; set; } = new List<Models.Media.Album> { };
 
         public AlbumsModel(ILogger<AlbumsModel> logger, AlbumService albumService)
         {
