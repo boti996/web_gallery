@@ -3,11 +3,10 @@ using MongoDB.Driver;
 using web_gallery.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace web_gallery.Services
 {
-     public abstract class MongoService<TId, DbElement, IDbSettings>
+    public abstract class MongoService<TId, DbElement, IDbSettings>
         where DbElement : Models.Model<TId>
         where IDbSettings : IDatabaseSettings
     {

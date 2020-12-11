@@ -1,20 +1,12 @@
-using System.Reflection;
-using System.Collections.Immutable;
-using System.Collections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using web_gallery.Models;
 using Microsoft.Extensions.Options;
-using web_gallery.Services;
 using AspNetCore.Identity.Mongo;
 using Microsoft.AspNetCore.DataProtection;
 
