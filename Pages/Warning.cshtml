@@ -4,7 +4,7 @@
     ViewData["Title"] = "Warning";
     var redirectContent = $"{Preferences.DefaultRedirectInSeconds}; url=\"{Model.ReturnUrl}\"";
 }
-@section header {
+@section Header {
     <meta http-equiv="refresh" content="@redirectContent">
 }
 

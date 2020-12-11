@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,8 @@ using web_gallery.Models;
 using Microsoft.Extensions.Options;
 using AspNetCore.Identity.Mongo;
 using Microsoft.AspNetCore.DataProtection;
+using System.Threading.Tasks;
+using Flurl;
 
 namespace web_gallery
 {
@@ -85,6 +88,17 @@ namespace web_gallery
                 options.LoginPath = "/Users/Login";
                 options.LogoutPath = "/Users/Logout";
                 options.AccessDeniedPath = "/Warning";
+                options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+                {
+                    OnRedirectToAccessDenied = ctx =>
+                    {
+                        ctx.RedirectUri = Preferences.DefaultRedirectUrl;
+                        var redirectPath = ctx.Options.AccessDeniedPath.ToString().SetQueryParam("warningMessage", "Access denied");
+                        ctx.Response.Redirect(redirectPath);
+
+                        return Task.CompletedTask;
+                    }
+                };
                 options.SlidingExpiration = true;
             });
 

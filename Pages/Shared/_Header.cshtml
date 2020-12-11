@@ -1,7 +1,62 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<Models.Users.User> SignInManager
 @inject UserManager<Models.Users.User> UserManager
+@{
+    var isSignedIn = SignInManager.IsSignedIn(User);
+    var isAdmin = isSignedIn && User.IsInRole("Admin");
+}
 
+@functions{
+    public string active(string navPage)
+    {
+        var currentPage = ViewContext.RouteData.Values["page"].ToString()!;
+        return currentPage == navPage ? "active" : "";
+    }
+}
+
+<h3 class="masthead-brand">
+    <a class="navbar-brand" asp-area="" asp-page="/Index">Web Gallery</a>
+</h3>
+<nav class="nav nav-masthead justify-content-center">
+
+    @* TODO: set active nav-link *@
+    @* Etc. *@
+    <a class="nav-link @active("/About")" asp-area="" asp-page="/About">About us</a>
+    <span class="nav-link nav-separator"></span>
+
+    @* Media-access *@
+    <a class="nav-link @active("/Media/Albums")" asp-area="" asp-page="/Media/Albums">Albums</a>
+    <a class="nav-link @active("/Media/Videos")" asp-area="" asp-page="/Media/Videos">Videos</a>
+    @if (isSignedIn)
+    {
+        <a class="nav-link @active("/Media/Upload")" asp-area="" asp-page="/Media/Upload">Upload</a>
+        @if (isAdmin)
+        {
+            <a class="nav-link @active("/Media/Moderation")" asp-area="" asp-page="/Media/Moderate">Moderation</a>
+        }
+    }
+    <span class="nav-link nav-separator"></span>
+
+    @* User-management *@
+    @if (isSignedIn)
+    {
+        <a class="nav-link @active("/Users/Profile/Edit")" asp-area="" asp-page="/Users/Profile/Edit">Logged in as <u>@User.Identity.Name</u></a>
+        <a class="nav-link  " asp-area="" asp-page="/Users/Logout">Log out</a>
+        <form method="POST" asp-area="" asp-page="/Users/Logout" id="LogoutForm">
+            <input type="hidden">
+        </form>
+        @if (isAdmin)
+        {
+            <a class="nav-link @active("/Users/Invite")" asp-area="" asp-page="/Users/Invite">Editor Invitation</a>
+            <a class="nav-link @active("/Users/Ban")" asp-area="" asp-page="/Users/Ban">Editor Ban</a>
+        }
+    } else
+    {
+        <a class="nav-link @active("/Users/Login")" asp-area="" asp-page="/Users/Login">Login</a>
+    }
+
+</nav>
+<!--
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-page="/Index">web_gallery</a>
@@ -64,3 +119,4 @@
         </div>
     </div>
 </nav>
+-->

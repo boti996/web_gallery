@@ -20,6 +20,7 @@ namespace web_gallery.Pages
             _logger = logger;
         }
 
+        //[HttpGet("{warningMessage}/{returnUrl}")]
         public void OnGet(string? warningMessage, string? returnUrl = null)
         {
             ReturnUrl = returnUrl ?? Preferences.DefaultRedirectUrl;

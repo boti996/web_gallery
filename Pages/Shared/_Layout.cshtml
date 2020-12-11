@@ -1,40 +1,52 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<!-- HEAD -->
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - web_gallery</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    @RenderSection("header", required: false)
-</head>
-<!-- BODY -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" />
+        <meta name="description" content="A web gallery for browsing and sharing photo albums and videos.">
+        <meta name="author" content="Botond Dobai">
+        <link rel="icon" href="~/favicon.ico">
 
-<body>
-    <!-- HEADER -->
-    <header>
-        <partial name="_Header" />
-    </header>
-    <!-- CONTENT -->
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <!-- FOOTER -->
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - web_gallery - <a asp-area="" asp-page="/About">About</a>
+        <title>@ViewData["Title"] - Web Gallery</title>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        @* TODO *@
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        @RenderSection("Header", required: false)
+    </head>
+
+    <body class="text-center">
+
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <partial name="_Header" />
+                </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                @RenderBody()
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p>
+                        &copy; 2020 - Web Gallery - <a asp-area="" asp-page="/About">About us</a>
+                    </p>
+                </div>
+            </footer>
+
         </div>
-    </footer>
-    <!-- SCRIPTS -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
-</body>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
+
+    </body>
 
 </html>
