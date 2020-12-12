@@ -42,11 +42,9 @@
     {
         <a class="nav-link @active("/Users/Profile/Edit")" asp-area="" asp-page="/Users/Profile/Edit">Logged in as <u>@User.Identity.Name</u></a>
         <a class="nav-link  " asp-area="" asp-page="/Users/Logout">Log out</a>
-        <form method="POST" asp-area="" asp-page="/Users/Logout" id="LogoutForm">
-            <input type="hidden">
-        </form>
         @if (isAdmin)
         {
+            <span class="nav-link nav-separator"></span>
             <a class="nav-link @active("/Users/Invite")" asp-area="" asp-page="/Users/Invite">Editor Invitation</a>
             <a class="nav-link @active("/Users/Ban")" asp-area="" asp-page="/Users/Ban">Editor Ban</a>
         }

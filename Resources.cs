@@ -19,10 +19,18 @@ namespace web_gallery
     public static class Preferences
     {
         private static readonly TimeSpan RegistrationTokenValidityDuration = TimeSpan.FromHours(168);
-        public static Boolean isValidRegistrationToken(Token token)
+        public static bool isValidRegistrationToken(Token token)
         {
+            if (!token.IsValid)
+            {
+                return false;
+            }
             var timeElapsed = DateTime.Now.Subtract(token.Timestamp);
-            return timeElapsed < RegistrationTokenValidityDuration;
+            if (timeElapsed >= RegistrationTokenValidityDuration)
+            {
+                return false;
+            }
+            return true;
         }
         public static readonly string DefaultRedirectUrl = "/Index";
         public const int DefaultRedirectInSeconds = 5;

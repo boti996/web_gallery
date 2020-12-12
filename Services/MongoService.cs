@@ -26,7 +26,7 @@ namespace web_gallery.Services
             _elements.Find(element => true).ToList();
 
         public DbElement Get(string id) =>
-            _elements.Find<DbElement>(element => element!.Id!.ToString() == id).FirstOrDefault();
+            _elements.Find<DbElement>(element => element!.Id!.Equals(id)).FirstOrDefault();
 
         public DbElement Create(DbElement element)
         {
@@ -35,13 +35,13 @@ namespace web_gallery.Services
         }
 
         public void Update(string id, DbElement elementIn) =>
-            _elements.ReplaceOne(element => element.Id!.ToString() == id, elementIn);
+            _elements.ReplaceOne(element => element.Id!.Equals(id), elementIn);
 
         public void Remove(DbElement elementIn) =>
-            _elements.DeleteOne(element => element.Id!.ToString() == elementIn.Id!.ToString());
+            _elements.DeleteOne(element => element.Id!.Equals(elementIn.Id));
 
         public void Remove(string id) =>
-            _elements.DeleteOne(element => element.Id!.ToString() == id);
+            _elements.DeleteOne(element => element.Id!.Equals(id));
     }
 
     public abstract class MongoService<DbElement, IDbSettings> : MongoService<string, DbElement, IDbSettings>

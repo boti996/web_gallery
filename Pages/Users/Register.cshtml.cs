@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using web_gallery.Services;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace web_gallery.Pages
 {
@@ -36,6 +37,11 @@ namespace web_gallery.Pages
         //[Compare("Password", ErrorMessage = "Confirm password doesn't match.")]
         public string PasswordConfirm { set; get; } = null!;
 
+        [BindProperty]
+        [Display(Name = "Claim Admin role")]
+        [Required]
+        public bool ClaimAdminRole { set; get; } = false;
+
         private readonly TokenService _tokenService;
         private readonly UserManager<Models.Users.User> _userManager;
         private readonly SignInManager<Models.Users.User> _signInManager;
@@ -62,6 +68,10 @@ namespace web_gallery.Pages
                 return RedirectToPage("/Warning", new { warningMessage = WarningMessages.RegistrationTokenInvalid });
             }
             Debug.WriteLine("Register token was valid.");
+
+            tokenFromDb.IsValid = false;
+            _tokenService.Update(tokenFromDb.Id, tokenFromDb);
+
             return Page();
         }
 
@@ -83,8 +93,9 @@ namespace web_gallery.Pages
                 });
             }
             Debug.WriteLine($"User {Email} is being created..");
+
             var registeredUser = new Models.Users.User { UserName = Email, Email = Email };
-            var registrationResult = await _userManager.CreateAsync(registeredUser, Password);
+            var registrationResult = await _userManager.CreateAsync(registeredUser, Password);            
 
             if (registrationResult.Succeeded)
             {
@@ -113,6 +124,11 @@ namespace web_gallery.Pages
                     return LocalRedirect(returnUrl);
                 }
                 */
+
+                if (ClaimAdminRole)
+                {
+                    await _userManager.AddClaimAsync(registeredUser, new Claim(ClaimTypes.Role, "Admin"));
+                }
 
                 await _signInManager.SignInAsync(user: registeredUser, isPersistent: false);
                 return LocalRedirect(returnUrl);
