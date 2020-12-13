@@ -46,6 +46,7 @@ body {
 
 .cover-container {
   max-width: 42em;
+  min-width: 33%;
 }
 
 
@@ -95,6 +96,13 @@ body {
   content: '|';
 }
 
+@media (min-width: 768px) {
+  .collapse.dont-collapse-sm {
+    display: block;
+    height: auto !important;
+    visibility: visible;
+  }
+}
 
 /*
  * Cover
