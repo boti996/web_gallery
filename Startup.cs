@@ -11,6 +11,7 @@ using AspNetCore.Identity.Mongo;
 using Microsoft.AspNetCore.DataProtection;
 using System.Threading.Tasks;
 using Flurl;
+using web_gallery.Services;
 
 namespace web_gallery
 {
@@ -51,6 +52,12 @@ namespace web_gallery
             services.AddSingleton<Services.VideoService>();
             services.AddSingleton<Services.UserService>();
             services.AddSingleton<Services.TokenService>();
+
+            services.AddSingleton<Services.IEmailService>(
+                sp =>
+                    sp.GetRequiredService<IOptions<MockEmailService>>()
+                    .Value
+            );
 
             services.AddIdentityMongoDbProvider<
                 Models.Users.User,

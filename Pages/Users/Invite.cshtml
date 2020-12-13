@@ -4,6 +4,13 @@
     ViewData["Title"] = "Invite new user";
 }
 
-<div class="text-center">
-    <p>User invite form comes here</p>
+<div>
+    <form class="form-customn" method="POST">
+        <div class="form-label-group">
+            <input asp-for="Email"  class="form-control">
+            <label asp-for="Email" class="control-label"></label>
+        </div>
+
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Send Invitation</button>
+    </form>
 </div>

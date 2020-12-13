@@ -3,6 +3,9 @@ using MongoDB.Driver;
 using web_gallery.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Security.Cryptography;
+using MongoDB.Bson;
 
 namespace web_gallery.Services
 {
@@ -74,5 +77,25 @@ namespace web_gallery.Services
 
         public Models.Users.Token GetByValue(string value) =>
             _elements.Find<Models.Users.Token>(element => element.Value == value).FirstOrDefault();
+
+        public static Models.Users.Token generateToken()
+        {
+            var token = new Models.Users.Token
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Value = generateTokenHash(),
+                IsValid = true
+            };
+            return token;
+        }
+        protected static string generateTokenHash()
+        {
+            var bytes = new byte[16];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(bytes);
+            }
+            return BitConverter.ToString(bytes);
+        }
     }
 }
