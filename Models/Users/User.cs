@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using AspNetCore.Identity.Mongo.Model;
+using System;
 
 namespace web_gallery.Models.Users
 {
@@ -16,6 +17,40 @@ namespace web_gallery.Models.Users
         public string Password { get; set; } = null!;
         [BsonRequired]
         public Permissions Permissions { get; set; } = null!;
+        public Suspended? Suspended { get; set; } = null;
+
+        public uint checkSuspended()
+        {
+            if (Suspended?.IsSuspended is true)
+            {
+                if (Suspended!.Until.Equals(DateTime.MaxValue))
+                {
+                    return uint.MaxValue;
+                }
+                var daysLeft = (Suspended!.Until - DateTime.Now).Days;
+                return (
+                    daysLeft > 0
+                    ? Convert.ToUInt32(daysLeft)
+                    : 0
+                );
+            }
+            return 0;
+        }
+
+        public void setSuspended(bool IsSuspended, bool SuspendOnly)
+        {
+            Suspended = new Suspended
+            {
+                IsSuspended = IsSuspended,
+                Until = Preferences.getSuspendDate(SuspendOnly)
+            };
+        }
+    }
+
+    public class Suspended
+    {
+        public bool IsSuspended { get; set; } = false;
+        public DateTime Until { get; set; } = DateTime.MinValue;
     }
 
     public class Details

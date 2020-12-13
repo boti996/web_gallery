@@ -25,8 +25,8 @@ namespace web_gallery.Services
         public List<DbElement> Get() =>
             _elements.Find(element => true).ToList();
 
-        public DbElement Get(string id) =>
-            _elements.Find<DbElement>(element => element!.Id!.Equals(id)).FirstOrDefault();
+        public DbElement Get(TId id) =>
+            _elements.Find<DbElement>(element => element.Id!.Equals(id)).FirstOrDefault();
 
         public DbElement Create(DbElement element)
         {
@@ -34,13 +34,13 @@ namespace web_gallery.Services
             return element;
         }
 
-        public void Update(string id, DbElement elementIn) =>
+        public void Update(TId id, DbElement elementIn) =>
             _elements.ReplaceOne(element => element.Id!.Equals(id), elementIn);
 
         public void Remove(DbElement elementIn) =>
             _elements.DeleteOne(element => element.Id!.Equals(elementIn.Id));
 
-        public void Remove(string id) =>
+        public void Remove(TId id) =>
             _elements.DeleteOne(element => element.Id!.Equals(id));
     }
 

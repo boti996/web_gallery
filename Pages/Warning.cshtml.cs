@@ -25,7 +25,7 @@ namespace web_gallery.Pages
         {
             ReturnUrl = returnUrl ?? Preferences.DefaultRedirectUrl;
             WarningMessage = warningMessage ?? WarningMessages.Default;
-            var warning = $"Warning was occured: {WarningMessage}";
+            var warning = $"Warning/Information message was occured: {WarningMessage}";
             Debug.WriteLine(warning);
             _logger.LogInformation(warningMessage);
         }

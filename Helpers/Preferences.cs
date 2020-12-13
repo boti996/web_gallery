@@ -3,21 +3,17 @@ using web_gallery.Models.Users;
 
 namespace web_gallery
 {
-    public static class PolicyNames
-    {
-        public const string RequireAdminRole = "RequireAdminRole";
-    }
-
-    public static class WarningMessages
-    {
-        public const string Default = "Something went wrong!";
-        public const string RegistrationTokenInvalid =
-            @"Missing or invalid registration token.
-            Please ask for an invitation email from an Administrator!";
-    }
-
     public static class Preferences
     {
+        public const uint SuspendDays = 30;
+        public static DateTime getSuspendDate(bool suspendOnly)
+        {
+            return (
+                suspendOnly
+                ? DateTime.Now + TimeSpan.FromDays(SuspendDays)
+                : DateTime.MaxValue
+            );
+        }
         private static readonly TimeSpan RegistrationTokenValidityDuration = TimeSpan.FromHours(168);
         public static bool isValidRegistrationToken(Token token)
         {

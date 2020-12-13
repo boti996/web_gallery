@@ -46,6 +46,18 @@ namespace web_gallery.Pages
 
             if (ModelState.IsValid)
             {
+                var user = await _userManager.FindByEmailAsync(Email);
+                if (user != null)
+                {
+                    var suspendedDays = user.checkSuspended();
+                    if (suspendedDays > 0)
+                    {
+                        ModelState.AddModelError(string.Empty, WarningMessages.SuspendedAccount);
+                        ModelState.AddModelError(string.Empty, WarningMessages.SuspendedDaysLeft(suspendedDays));
+                        return Page();
+                    }
+                }
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, 
                 // set lockoutOnFailure: true
@@ -71,7 +83,7 @@ namespace web_gallery.Pages
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, WarningMessages.InvalidLoginAttempt);
                     return Page();
                 }
             }

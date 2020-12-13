@@ -4,6 +4,27 @@
     ViewData["Title"] = "Ban user";
 }
 
-<div class="text-center">
-    <p>User ban form comes here</p>>
+<div>
+    <form class="form-customn" method="POST">
+        <p>Banned editor's access will be suspended.</p>
+        <div class="form-label-group">
+            <select asp-for="UserSelect" class="form-control">
+            <option value="@Model.getDefaultOBjectId()"></option>
+                @foreach (var user in @Model.Users)
+                {
+                    <option value="@user.Id">@user</option>
+                }
+            </select>
+            <label asp-for="UserSelect" class="control-label"></label>
+        </div>
+
+        <div class="checkbox login-checkbox">
+            <label asp-for="SuspendOnly" class="control-label">
+                Suspend only for @Preferences.SuspendDays days
+            </label>
+            <input asp-for="SuspendOnly" class="form-control">
+        </div>
+
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Ban editor</button>
+    </form>
 </div>
