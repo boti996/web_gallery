@@ -5,6 +5,7 @@ UI:
     -Image view + DL button
     -Video.JS
     -Filter by name, date and tags
+    -CSHTML templates
 DB:
     -Azure Bblob Storage
     -Compression: preview, normal view, original (only for downloading)
@@ -17,10 +18,6 @@ Meta:
     -DB init script
     -Tests
     -Fix commits
-Code:
-    -Delete unneccessary dependencies
-    -Delete unneccessary imports
-    -Format code ~ convention
 Views:
     -Gallery grid
     -Enlarge image
@@ -72,20 +69,12 @@ Moderate:
     -Load more
 
 Priority:
-    Delete unneccessary deps, imports
-    Reformat
-    Ban form
     Invite form
-    Login add forget password form
-    Register debug confirm
     Upload video vs image upload option
-    Invite form
-    About load partials
-    Edit form
-    Video.JS
-    Ayure Blob Storage
     Album grid
     Video list
+    Video.JS
+    Azure Blob Storage
     Load more
     Image enlarge view
     Filter

@@ -490,3 +490,12 @@ https://stackoverflow.com/questions/40217623/redirect-to-login-when-unauthorized
 
 https://videojs.com/getting-started/
 https://azure.microsoft.com/en-us/services/key-vault/
+
+https://getbootstrap.com/docs/4.0/examples/
+
+https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio#xsrf
+https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-5.0
+
+https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/11-adding-email-to-your-web-site
+
+Linq
