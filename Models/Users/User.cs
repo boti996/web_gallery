@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using AspNetCore.Identity.Mongo.Model;
 using System;
+using System.Collections.Generic;
 
 namespace web_gallery.Models.Users
 {
@@ -57,6 +58,7 @@ namespace web_gallery.Models.Users
     {
         public string Name { get; set; } = "";
         public string Description { get; set; } = "";
+        public List<string> SocialMedia { get; set; } = new List<string>();
     }
 
     public class Permissions
