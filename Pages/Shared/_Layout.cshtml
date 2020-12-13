@@ -19,10 +19,10 @@
 
     <body>
 
-        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <div class="cover-container d-flex h-100 p-3 w-100 mx-auto flex-column">
 
             <header class="masthead mb-auto">
-                <div class="inner collapse dont-collapse-sm" id="navbarHeader">
+                <div class="inner collapse dont-collapse-md" id="navbarHeader">
                     <partial name="_Header" />
                 </div>
                 <button class="navbar-toggler navbar-dark d-md-none d-block" id="navbarToggle" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
                 </button>
             </header>
 
-            <main role="main" class="inner cover">
+            <main role="main" class="inner cover container-fluid flex-fill p-5">
                 @RenderBody()
             </main>
 
