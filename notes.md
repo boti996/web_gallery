@@ -499,3 +499,10 @@ https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=
 https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/11-adding-email-to-your-web-site
 
 Linq
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-flask-with-mongodb-and-docker
+https://hub.docker.com/_/mongo
+https://gist.github.com/asoorm/7822cc742831639c93affd734e97ce4f
+https://docs.docker.com/compose/aspnet-mssql-compose/
+
+https://www.learnrazorpages.com/razor-pages/partial-pages
