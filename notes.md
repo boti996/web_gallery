@@ -533,3 +533,5 @@ https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/
 https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-list?tabs=dotnet
 
 https://docs.microsoft.com/en-us/azure/cdn/cdn-storage-custom-domain-https
+
+https://stackoverflow.com/questions/51855853/how-to-get-all-files-from-a-directory-in-azure-blob-using-listblobssegmentedasyn/51893352
