@@ -18,6 +18,4 @@ namespace web_gallery.Models.Media
         [BsonIgnore]
         public DateTime Timestamp => new ObjectId(Id).CreationTime;
     }
-
-
 }

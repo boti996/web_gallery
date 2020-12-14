@@ -6,4 +6,8 @@
 
 <div class="text-center">
     <p>Album view comes here</p>
+    @foreach (var image in @Model.Images)
+    {
+        <img src="@image"></img>
+    }
 </div>

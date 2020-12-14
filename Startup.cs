@@ -26,7 +26,7 @@ namespace web_gallery
 
         protected void ConfigureDatabase<T, I>(IServiceCollection services)
             where T : class, I, new()
-            where I : class, IDatabaseSettings
+            where I : class
         {
             services.Configure<T>(
                 Configuration.GetSection(typeof(T).Name));
@@ -48,10 +48,15 @@ namespace web_gallery
             this.ConfigureDatabase<UsersDatabaseSettings, IUsersDatabaseSettings>(services);
             this.ConfigureDatabase<MediaDatabaseSettings, IMediaDatabaseSettings>(services);
 
+            this.ConfigureDatabase<BlobStorageSettings, IBlobStorageSettings>(services);
+
             services.AddSingleton<Services.AlbumService>();
             services.AddSingleton<Services.VideoService>();
             services.AddSingleton<Services.UserService>();
             services.AddSingleton<Services.TokenService>();
+
+            services.AddSingleton<Services.ImageBlobService>();
+            services.AddSingleton<Services.VideoBlobService>();
 
             services.AddSingleton<Services.IEmailService>(
                 sp =>
