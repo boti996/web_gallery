@@ -531,3 +531,5 @@ https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage
 https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/blob/master/v12/Program.cs
 
 https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-list?tabs=dotnet
+
+https://docs.microsoft.com/en-us/azure/cdn/cdn-storage-custom-domain-https
