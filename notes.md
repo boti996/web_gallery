@@ -517,3 +517,5 @@ https://www.thereformedprogrammer.net/asp-net-core-razor-pages-how-to-implement-
 https://www.learnrazorpages.com/razor-pages/ajax/partial-update
 
 https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-5.0
+
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet
