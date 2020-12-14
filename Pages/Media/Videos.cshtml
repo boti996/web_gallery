@@ -2,15 +2,56 @@
 @model VideosModel
 @{
     ViewData["Title"] = "Videos";
+    var videosPerPage = 1;
+}
+@functions {
+  public int getTrimmedCount(int n) => Math.Min(n, Model.Videos.Count);
+}
+@section Header {
+        <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+
+         <script>
+           let pageIndex = 0;
+
+            function loadMore() {
+              pageIndex+=1;
+              $.ajax({
+                url: '/Media/Videos?handler=LoadedVideos',
+                data: {
+                    pageIndex: pageIndex,
+                    pageSize: @videosPerPage
+                }
+              })
+              .done(function(result) {
+                document.getElementById("videoCollection").insertAdjacentHTML('beforeend', result);
+              });
+            }
+          </script>
+}
+@section Scripts {
+    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 }
 
-<div class="text-center">
-    <ul>
-        @foreach (var video in @Model.Videos)
-        {
-            <li>@video.Id</li>
-        }
-        @* TODO: https://videojs.com/ *@
-        @* TODO: show Details *@
-    </ul>
+<div class="col-md-12">
+
+  <section class="jumbotron text-center bg-dark">
+    <div class="container">
+      <h1 class="jumbotron-heading">Videos</h1>
+      <p class="lead text-muted">You can find and play videos here.</p>
+       <button onclick="loadMore()">Load more</button>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-dark">
+    <div class="container">
+
+      <div class="row" id="videoCollection">
+
+        @Html.Partial("_VideoCardsPartial", model:Model.Videos.GetRange(0, getTrimmedCount(videosPerPage)))
+
+      </div>
+
+    </div>
+  </div>
+
 </div>

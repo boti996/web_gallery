@@ -1,0 +1,36 @@
+@model List<Models.Media.Video>
+@{
+}
+
+@foreach (var video in @Model)
+{
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div class="card mb-4 box-shadow bg-secondary">
+
+        <div style="width: 100%;">
+            @try
+            {
+                @Html.Partial("_VideoIframeEmbeddedPartial", video.Resource_link);
+            } catch
+            {
+                @Html.Partial("_VideoJsEmbeddedPartial", video.Resource_link);   
+            }
+        </div>
+
+        <div class="card-body">
+        <p class="card-text">
+            @video.Details.Description
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group" style="">
+            <a href="/Media/Videos/View?id=@video.Id" role="button" class="btn btn-sm btn-outline-light disabled">View</a>
+            <a href="#" role="button" class="btn btn-sm btn-outline-light disabled">Edit</a>
+            </div>
+            <small class="text-muted">
+            @video.Timestamp.ToString("yyyy.MM.dd.")
+            </small>
+        </div>
+        </div>
+    </div>
+    </div>   
+}

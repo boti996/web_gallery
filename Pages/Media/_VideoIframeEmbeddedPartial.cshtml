@@ -1,0 +1,17 @@
+@model string
+@{
+}
+
+@using System.Text.RegularExpressions;
+@functions {
+    public string predictIframeContent(string video) {
+        Regex rx = new Regex(@"<iframe.*src=" + "\"([^\"]*)\"" + @".*>.*</iframe>",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        MatchCollection matches = rx.Matches(video);
+        return matches[0].Groups[1].Value;
+    }
+}
+
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item video-player" src="@predictIframeContent(Model)" allowfullscreen></iframe>
+</div>

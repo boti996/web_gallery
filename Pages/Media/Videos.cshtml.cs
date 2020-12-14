@@ -26,5 +26,25 @@ namespace web_gallery.Pages
         {
             Videos = _videoService.Get();
         }
+
+        public IActionResult OnGetLoadedVideos(int pageIndex, int pageSize)
+        {
+            Videos = _videoService.Get();
+            var fromIdx = pageIndex * pageSize;
+            var count = pageSize;
+            List<Models.Media.Video>? videos = null;
+            if (fromIdx > Videos.Count)
+            {
+                videos = Videos.GetRange(0, 0);
+            } else
+            if (fromIdx + count > Videos.Count)
+            {
+                videos = Videos.GetRange(fromIdx, Videos.Count - fromIdx);
+            } else
+            {
+                videos = Videos.GetRange(fromIdx, count);
+            }
+            return Partial("_VideoCardsPartial", videos);
+        }
     }
 }

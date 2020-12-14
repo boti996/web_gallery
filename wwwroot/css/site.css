@@ -281,3 +281,7 @@ body {
 .album {
   margin-top: 1rem;
 }
+
+.video-player {
+  width: 100%!important;
+}
