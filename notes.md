@@ -506,3 +506,14 @@ https://gist.github.com/asoorm/7822cc742831639c93affd734e97ce4f
 https://docs.docker.com/compose/aspnet-mssql-compose/
 
 https://www.learnrazorpages.com/razor-pages/partial-pages
+
+https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-5.0
+
+https://github.com/aspnet/Mvc/issues/6759
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-5.0
+
+https://www.thereformedprogrammer.net/asp-net-core-razor-pages-how-to-implement-ajax-requests/
+
+https://www.learnrazorpages.com/razor-pages/ajax/partial-update
+
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-5.0
