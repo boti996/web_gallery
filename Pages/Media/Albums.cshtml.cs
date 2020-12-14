@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +26,26 @@ namespace web_gallery.Pages
         public void OnGet()
         {
             Albums = _albumService.Get();
+        }
+
+        public IActionResult OnGetLoadedAlbums(int pageIndex, int pageSize)
+        {
+            Albums = _albumService.Get();
+            var fromIdx = pageIndex * pageSize;
+            var count = pageSize;
+            List<Models.Media.Album>? albums = null;
+            if (fromIdx > Albums.Count)
+            {
+                albums = Albums.GetRange(0, 0);
+            } else
+            if (fromIdx + count > Albums.Count)
+            {
+                albums = Albums.GetRange(fromIdx, Albums.Count - fromIdx);
+            } else
+            {
+                albums = Albums.GetRange(fromIdx, count);
+            }
+            return Partial("_AlbumCardsPartial", albums);
         }
     }
 }

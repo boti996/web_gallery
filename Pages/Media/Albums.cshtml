@@ -2,6 +2,29 @@
 @model AlbumsModel
 @{
     ViewData["Title"] = "Albums";
+    var albumsPerPage = 1;
+}
+@functions {
+  public int getTrimmedCount(int n) => Math.Min(n, Model.Albums.Count);
+}
+@section Header {
+         <script>
+           let pageIndex = 0;
+
+            function loadMore() {
+              pageIndex+=1;
+              $.ajax({
+                url: '/Media/Albums?handler=LoadedAlbums',
+                data: {
+                    pageIndex: pageIndex,
+                    pageSize: @albumsPerPage
+                }
+              })
+              .done(function(result) {
+                document.getElementById("albumCollection").insertAdjacentHTML('beforeend', result);
+              });
+            }
+          </script>
 }
 
 <div class="col-md-12">
@@ -10,36 +33,16 @@
     <div class="container">
       <h1 class="jumbotron-heading">Albums</h1>
       <p class="lead text-muted">You can find image albums here.</p>
+       <button onclick="loadMore()">Load more</button>
     </div>
   </section>
 
   <div class="album py-5 bg-dark">
     <div class="container">
 
-      <div class="row">
+      <div class="row" id="albumCollection">
 
-        @foreach (var album in @Model.Albums)
-        {
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card mb-4 box-shadow bg-secondary">
-              <img class="card-img-top" data-src="TODO" alt="Thumbnail">
-              <div class="card-body">
-                <p class="card-text">
-                  @album.Details.Description
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group" style="">
-                    <a href="/Media/Albums/View?id=@album.Id" role="button" class="btn btn-sm btn-outline-light">View</a>
-                    <a href="#" role="button" class="btn btn-sm btn-outline-light disabled">Edit</a>
-                  </div>
-                  <small class="text-muted">
-                    @album.Timestamp.ToString("yyyy.MM.dd.")
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>   
-        }
+        @Html.Partial("_AlbumCardsPartial", model:Model.Albums.GetRange(0, getTrimmedCount(albumsPerPage)))
 
       </div>
 
@@ -47,16 +50,3 @@
   </div>
 
 </div>
-<!--
-<div class="text-center">
-    <p>Album previews come here</p>
-    <ul>
-        @foreach (var album in @Model.Albums)
-        {
-            <li>@album.Id</li>
-        }
-        @* TODO: show preview (random pic from album) *@
-        @* TODO: show Details *@
-    </ul>
-</div>
--->
