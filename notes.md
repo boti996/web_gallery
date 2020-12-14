@@ -519,3 +519,15 @@ https://www.learnrazorpages.com/razor-pages/ajax/partial-update
 https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-5.0
 
 https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet
+https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs.Batch
+
+
+
+    BlobServiceClient: The BlobServiceClient class allows you to manipulate Azure Storage resources and blob containers.
+    BlobContainerClient: The BlobContainerClient class allows you to manipulate Azure Storage containers and their blobs.
+    BlobClient: The BlobClient class allows you to manipulate Azure Storage blobs.
+    BlobDownloadInfo: The BlobDownloadInfo class represents the properties and content returned from downloading a blob.
+
+https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/blob/master/v12/Program.cs
+
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-list?tabs=dotnet
