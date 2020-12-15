@@ -63,6 +63,8 @@ $ # ASSERTION: echoes "hello world"
 ```
 
 ```shell
+$ # install fuse-overlayfs for more efficient filesystem (only vfs is available in rootless mode by default)
+$ sudo pacman -S fuse-overlayfs
 $ # install docker rootless script
 $ git clone https://aur.archlinux.org/docker-rootless-bin.git
 $ cd docker-rootless-bin
