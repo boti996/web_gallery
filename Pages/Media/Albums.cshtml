@@ -2,7 +2,7 @@
 @model AlbumsModel
 @{
     ViewData["Title"] = "Albums";
-    var albumsPerPage = 1;
+    var albumsPerPage = 3;
 }
 @functions {
   public int getTrimmedCount(int n) => Math.Min(n, Model.Albums.Count);

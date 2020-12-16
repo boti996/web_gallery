@@ -6,7 +6,7 @@
 
 
 <div class="col-md-4">
-    <form class="form-customn" method="POST">
+    <form class="form-customn" method="POST" enctype="multipart/form-data">
         <div class="form-label-group">
             <select asp-for="AlbumSelect" class="form-control">
             <option value="">Create new album</option>
@@ -19,7 +19,12 @@
         </div>
 
         <div class="form-label-group">
-            <input asp-for="ImageSelect" class="form-control" type="file" multiple>
+            <input asp-for="AlbumName" class="form-control" type="text">
+            <label asp-for="AlbumName" class="control-label"></label>
+        </div>
+
+        <div class="form-label-group">
+            <input asp-for="ImageSelect" class="form-control" type="file" accept="image/*" multiple>
             <label asp-for="ImageSelect" class="control-label"></label>
         </div>
 

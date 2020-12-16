@@ -2,7 +2,7 @@
 @model VideosModel
 @{
     ViewData["Title"] = "Videos";
-    var videosPerPage = 1;
+    var videosPerPage = 3;
 }
 @functions {
   public int getTrimmedCount(int n) => Math.Min(n, Model.Videos.Count);

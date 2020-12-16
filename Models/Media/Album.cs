@@ -8,7 +8,7 @@ namespace web_gallery.Models.Media
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = null!;
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
         [BsonRequired]
         public Details Details { get; set; } = null!;
         [BsonRequired]

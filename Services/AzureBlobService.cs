@@ -1,10 +1,10 @@
 
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
 using Flurl;
 using web_gallery.Models;
 using web_gallery.Models.Media;
@@ -21,7 +21,7 @@ namespace web_gallery.Services
         public AzureBlobService(IBlobStorageSettings settings, string containerName)
         {
             Debug.WriteLine(
-                $"Azure Blob Storage Service getting database: {containerName}" 
+                $"Azure Blob Storage Service getting database: {containerName}"
                 + $"from connection: {settings.ConnectionString}"
             );
             _cdnRootUrl = Url.Combine(settings.CdnRoot, containerName);
@@ -40,6 +40,12 @@ namespace web_gallery.Services
             => await _blobs.DownloadAsync();
         public string getCdnUrl(string blobName)
             => Url.Combine(_cdnRootUrl, blobName);
+
+        public async Task<Response<BlobContentInfo>> CreateBlob(MemoryStream file, string fileName, string folderName)
+            => await _container.UploadBlobAsync(
+                    Url.Combine(folderName, fileName),
+                    file
+            );
     }
 
     public class ImageBlobService : AzureBlobService<BlobAlbum, IBlobStorageSettings> {

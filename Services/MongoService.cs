@@ -38,7 +38,11 @@ namespace web_gallery.Services
         }
 
         public void Update(TId id, DbElement elementIn) =>
-            _elements.ReplaceOne(element => element.Id!.Equals(id), elementIn);
+            _elements.ReplaceOne(
+                element => element.Id!.Equals(id), 
+                elementIn, 
+                new ReplaceOptions {IsUpsert=true}
+            );
 
         public void Remove(DbElement elementIn) =>
             _elements.DeleteOne(element => element.Id!.Equals(elementIn.Id));
