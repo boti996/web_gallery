@@ -1,0 +1,77 @@
+version: "3.8"
+services:
+#  web_gallery:
+#    build:
+#      context: .
+#      dockerfile: .devcontainer/Dockerfile
+#    ports:
+#      - 5000:5000
+#      - 5001:5001
+#    depends_on:
+#      - mongo_onlab
+#      - mongo_slave
+#      - mongo_arbiter
+#    restart: unless-stopped
+#    stdin_open: true # docker run -i
+#    tty: true        # docker run -t
+
+  mongo_onlab:
+    hostname: mongo_onlab
+    container_name: mongo_onlab
+    image: mongo:4.4.2-bionic
+    expose:
+      - 27017
+    ports:
+      - 27011:27017
+    restart: unless-stopped
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./db:/data/db
+      - ./mongo:/etc/mongo
+    entrypoint: [
+      "/usr/bin/mongod",
+      "--bind_ip_all",
+      "--replSet", "rs0",
+      "--wiredTigerCacheSizeGB", "1.5",
+    ]
+  mongo_slave:
+    hostname: mongo_slave
+    container_name: mongo_slave
+    image: mongo:4.4.2-bionic
+    expose:
+      - 27017
+    ports:
+      - 27012:27017
+    restart: unless-stopped
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./db_slave/:/data/db
+      - ./mongo_slave/:/etc/mongo_slave
+    entrypoint: [
+      "/usr/bin/mongod",
+      "--bind_ip_all",
+      "--replSet", "rs0",
+      "--wiredTigerCacheSizeGB", "1.5",
+    ]
+  mongo_arbiter:
+    hostname: mongo_arbiter
+    container_name: mongo_arbiter
+    image: mongo:4.4.2-bionic
+    expose:
+      - 27017
+    ports:
+      - 27013:27017
+    restart: unless-stopped
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./db_arbiter/:/data/db
+      - ./mongo_arbiter/:/etc/mongo_arbiter
+    entrypoint: [
+      "/usr/bin/mongod",
+      "--bind_ip_all",
+      "--replSet", "rs0",
+      "--wiredTigerCacheSizeGB", "1.5",
+    ]
