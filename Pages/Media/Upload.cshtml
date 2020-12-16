@@ -4,7 +4,6 @@
     ViewData["Title"] = "Media upload";
 }
 
-
 <div class="col-md-4">
     <form class="form-customn" method="POST" enctype="multipart/form-data">
         <div class="form-label-group">
@@ -28,6 +27,19 @@
             <label asp-for="ImageSelect" class="control-label"></label>
         </div>
 
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Upload</button>
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Album Upload</button>
+    </form>
+
+</div>
+
+<div class="col-md-4" style="padding-top: 5rem;">
+    <form class="form-customn" method="POST">
+
+        <div class="form-label-group">
+            <input asp-for="VideoLink" class="form-control" type="text" value="">
+            <label asp-for="VideoLink" class="control-label"></label>
+        </div>
+
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Video Upload</button>
     </form>
 </div>

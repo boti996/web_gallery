@@ -14,6 +14,10 @@ namespace web_gallery.Pages
     public class MediaUploadModel : PageModel
     {
         [BindProperty]
+        [Display(Name = "Video link or embeddable iframe")]
+        public string? VideoLink { set; get; } = null!;
+
+        [BindProperty]
         [Display(Name = "Select album")]
         public string? AlbumSelect { set; get; } = null!;
 
@@ -29,6 +33,7 @@ namespace web_gallery.Pages
         [Required]
         public IFormFile[] ImageSelect { set; get; } = null!;
         private IWebHostEnvironment _environment;
+        private readonly VideoService _videoService;
         private readonly AlbumService _albumService;
         private readonly ImageBlobService _imageBlobService;
         private readonly ILogger<MediaUploadModel> _logger;
@@ -39,13 +44,15 @@ namespace web_gallery.Pages
         public MediaUploadModel(
             IWebHostEnvironment hostEnvironment,
             ILogger<MediaUploadModel> logger, 
-            ImageBlobService imageBlobService,    
+            ImageBlobService imageBlobService,
+            VideoService videoService,    
             AlbumService albumService
         )
         {
             _environment = hostEnvironment;
             _logger = logger;
             _imageBlobService = imageBlobService;
+            _videoService = videoService;
             _albumService = albumService;
         }
 
@@ -56,6 +63,12 @@ namespace web_gallery.Pages
 
         public IActionResult OnPostAsync()
         {
+            if (VideoLink != null)
+            {
+                _videoService.Create(new Video{ Resource_link=VideoLink, Details= new Details{ Description="cool vid" } });
+                return RedirectToPage("/Media/Videos");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
